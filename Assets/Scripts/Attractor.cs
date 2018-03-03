@@ -8,8 +8,12 @@ public class Attractor : MonoBehaviour {
 	
 	private static List<Attractor> attractors;
 
-	private Rigidbody2D myRigidbody;
+	[SerializeField] private float rotationStrength = 1.0f;
 
+	private Rigidbody2D myRigidbody;
+	
+	//////////////////// Unity Event Handlers ////////////////////
+	
 	private void Start () {
 		myRigidbody = GetComponent<Rigidbody2D>();
 	}
@@ -25,9 +29,11 @@ public class Attractor : MonoBehaviour {
 		attractors.Add(this);
 	}
 
-	private void onDisable() {
+	private void OnDisable() {
 		attractors.Remove(this);
 	}
+	
+	//////////////////// Helper Methods //////////////////////////
 
 	private void attract(Attractor obj) {
 		var objectRigidBody = obj.GetComponent<Rigidbody2D>();
@@ -35,6 +41,7 @@ public class Attractor : MonoBehaviour {
 		var distance = direction.magnitude;
 		var forceMagnitude = (myRigidbody.mass * objectRigidBody.mass) / Mathf.Pow(distance, 2);
 		var force = direction.normalized * forceMagnitude;
+		
 		objectRigidBody.AddForce(force);
 	}
 }
