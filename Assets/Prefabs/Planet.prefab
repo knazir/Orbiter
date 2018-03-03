@@ -9,53 +9,53 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1670895291051096}
+  m_RootGameObject: {fileID: 1081750910666830}
   m_IsPrefabParent: 1
---- !u!1 &1670895291051096
+--- !u!1 &1081750910666830
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4111888289119556}
-  - component: {fileID: 212432095092339660}
-  - component: {fileID: 58234093850819232}
-  - component: {fileID: 50614987870868568}
-  - component: {fileID: 114549347403086244}
-  - component: {fileID: 114099097361603766}
-  m_Layer: 0
+  - component: {fileID: 4266098876979596}
+  - component: {fileID: 212927051265078388}
+  - component: {fileID: 58932682388935836}
+  - component: {fileID: 50020058564132484}
+  - component: {fileID: 114460969475908652}
+  - component: {fileID: 114290896772991920}
+  m_Layer: 8
   m_Name: Planet
   m_TagString: CelestialBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4111888289119556
+--- !u!4 &4266098876979596
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1670895291051096}
+  m_GameObject: {fileID: 1081750910666830}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.83, y: 1.65, z: 0}
-  m_LocalScale: {x: 4.5, y: 4.5, z: 0}
+  m_LocalPosition: {x: -6.1616206, y: 19.452324, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50614987870868568
+--- !u!50 &50020058564132484
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1670895291051096}
+  m_GameObject: {fileID: 1081750910666830}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10000
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -64,12 +64,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 3
---- !u!58 &58234093850819232
+--- !u!58 &58932682388935836
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1670895291051096}
+  m_GameObject: {fileID: 1081750910666830}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -79,12 +79,12 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
---- !u!114 &114099097361603766
+--- !u!114 &114290896772991920
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1670895291051096}
+  m_GameObject: {fileID: 1081750910666830}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5271d1ce0c3518e458a2c4463e2c44d3, type: 3}
@@ -92,23 +92,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   angularVelocity: 10
   rotateRight: 1
---- !u!114 &114549347403086244
+--- !u!114 &114460969475908652
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1670895291051096}
+  m_GameObject: {fileID: 1081750910666830}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49d7a7a6ddefe824c99e147f44adc324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!212 &212432095092339660
+--- !u!212 &212927051265078388
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1670895291051096}
+  m_GameObject: {fileID: 1081750910666830}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -135,7 +135,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 774135ebd973fc04c88c175169b70f7c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6a679a82c82fa3740a6bc694faf0a313, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

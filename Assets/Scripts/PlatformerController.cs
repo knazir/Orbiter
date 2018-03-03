@@ -15,7 +15,6 @@ public class PlatformerController : MonoBehaviour {
 	[SerializeField] private LayerMask groundLayer;
 	[SerializeField] private float groundDetectRadius = 1.0f;
 	[SerializeField] private float groundRayLength = 1.0f;
-	[SerializeField] private float orientAngleThreshold = 10.0f;
 
 	private bool facingRight = true;
 	private Rigidbody2D myRigidBody;

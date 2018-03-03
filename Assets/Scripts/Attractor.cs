@@ -8,8 +8,6 @@ public class Attractor : MonoBehaviour {
 	
 	private static List<Attractor> attractors;
 
-	[SerializeField] private float rotationStrength = 1.0f;
-
 	private Rigidbody2D myRigidbody;
 	
 	//////////////////// Unity Event Handlers ////////////////////
