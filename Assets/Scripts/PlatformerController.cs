@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,8 +11,9 @@ public class PlatformerController : MonoBehaviour {
 	private const KeyCode JUMP = KeyCode.Space;
 	private const float MOVE_EPSILON = 0.001f;
 
-	[SerializeField] private float jumpForce = 2.0f;
-	[SerializeField] private float moveSpeed = 5.0f;	
+	[SerializeField] private float jumpForce = 500.0f;
+	[SerializeField] private float moveSpeed = 5.0f;
+	[SerializeField] private float rotateSpeed = 5.0f;
 	[SerializeField] private LayerMask groundLayer;
 	[SerializeField] private float groundDetectRadius = 1.0f;
 	[SerializeField] private float groundRayLength = 1.0f;
@@ -29,12 +31,12 @@ public class PlatformerController : MonoBehaviour {
 
 	private void Update() {
 		if (Input.GetKeyDown(JUMP)) applyJump();
-		var incomingGround = getIncomingGround();
-		if (incomingGround != null) reorientToLandOn();
 	}
 	
 	private void FixedUpdate () {
-		move();
+		if (isGrounded()) move();
+		else spin();
+		if (getIncomingGround() != null) reorientToLandOn();
 	}
 	
 	//////////////////// Helper Methods ////////////////////////
@@ -71,6 +73,16 @@ public class PlatformerController : MonoBehaviour {
 		moveDirection.y = myRigidBody.velocity.y;
 		moveDirection.z = 0.0f;
 		myRigidBody.velocity = moveDirection;
+	}
+
+	private void spin() {
+		var move = Input.GetAxis("Horizontal");
+		var moving = Math.Abs(move) > MOVE_EPSILON || Math.Abs(move) < -MOVE_EPSILON;
+		if (!moving) return;
+		
+		// negate rotate force to align with movement directions
+		myRigidBody.angularVelocity = 0.0f;
+		transform.Rotate(0, 0, move * -rotateSpeed);
 	}
 
 	private void flip() {

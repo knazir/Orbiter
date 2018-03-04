@@ -6,9 +6,20 @@ public class CameraController : MonoBehaviour {
 
 	[SerializeField] private Transform player;
 
+	private bool followPlayer;
 	private Vector3 offset;
 
+	public void FixPosition(Transform fixedTransform) {
+		followPlayer = false;
+		transform.position = new Vector3(fixedTransform.position.x, fixedTransform.position.y, transform.position.z);
+	}
+
+	public void FollowPlayer() {
+		followPlayer = true;
+	}
+
 	private void Start() {
+		followPlayer = true;
 		transform.position = new Vector3(player.position.x, player.position.y, transform.position.z);
 		
 		// TODO: Figure out if we want some kind of offset (redundant for now)
@@ -17,6 +28,6 @@ public class CameraController : MonoBehaviour {
 	
 	// Called after each Update every frame
 	private void LateUpdate() {
-		transform.position = player.transform.position + offset;
+		if (followPlayer) transform.position = player.transform.position + offset;
 	}
 }
