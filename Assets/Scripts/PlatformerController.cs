@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 public class PlatformerController : MonoBehaviour {
@@ -30,7 +32,11 @@ public class PlatformerController : MonoBehaviour {
 	}
 
 	private void Update() {
-		if (Input.GetKeyDown(JUMP)) applyJump();
+		if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) {
+			// if there's at least one finger touching...
+			applyJump();
+		}
+//		if (Input.GetKeyDown(JUMP)) applyJump();
 	}
 	
 	private void FixedUpdate () {
