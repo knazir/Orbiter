@@ -97,6 +97,7 @@ public class PlatformerController : MonoBehaviour {
 		var xScale = Mathf.Abs(localScale.x);
 		if (!facingRight) xScale *= -1;
 		transform.localScale = new Vector3(xScale, localScale.y, localScale.z);
+		myRigidBody.velocity = Vector2.zero;
 	}
 
 	private Collider2D getIncomingGround() {
