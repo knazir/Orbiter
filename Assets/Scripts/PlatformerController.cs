@@ -32,8 +32,8 @@ public class PlatformerController : MonoBehaviour {
 	}
 
 	private void Update() {
-		if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) {
-			// if there's at least one finger touching...
+		bool tappedToJump = Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began;
+		if (tappedToJump) {
 			applyJump();
 		}
 //		if (Input.GetKeyDown(JUMP)) applyJump();
