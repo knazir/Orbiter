@@ -32,11 +32,7 @@ public class PlatformerController : MonoBehaviour {
 	}
 
 	private void Update() {
-		bool tappedToJump = Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began;
-		if (tappedToJump) {
-			applyJump();
-		}
-//		if (Input.GetKeyDown(JUMP)) applyJump();
+		if (getInputJump()) applyJump();
 	}
 	
 	private void FixedUpdate () {
@@ -46,6 +42,11 @@ public class PlatformerController : MonoBehaviour {
 	}
 	
 	//////////////////// Helper Methods ////////////////////////
+	
+	private bool getInputJump() {
+		// check keyboard input or if there's at least one finger touching
+		return Input.GetKeyDown(JUMP) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began);
+	}
 
 	private void reorientToLandOn() {
 		rotateByRaycastFrom(-transform.up);		// down
