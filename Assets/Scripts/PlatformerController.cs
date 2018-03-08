@@ -14,12 +14,14 @@ public class PlatformerController : MonoBehaviour {
 	private const float MOVE_EPSILON = 0.001f;
 
 	[SerializeField] private float jumpForce = 500.0f;
+	[SerializeField] private float jumpFactor = 1.0f;
 	[SerializeField] private float moveSpeed = 5.0f;
 	[SerializeField] private float rotateSpeed = 5.0f;
 	[SerializeField] private LayerMask groundLayer;
 	[SerializeField] private float groundDetectRadius = 1.0f;
 	[SerializeField] private float groundRayLength = 1.0f;
 
+	private float curJumpForce = 0.0f;
 	private bool facingRight = true;
 	private Rigidbody2D myRigidBody;
 	private Animator myAnimator;
@@ -32,10 +34,13 @@ public class PlatformerController : MonoBehaviour {
 	}
 
 	private void Update() {
-		if (getInputJump()) applyJump();
+
+//		if (getInputJump()) applyJump();
 	}
 	
 	private void FixedUpdate () {
+		forceJump ();
+
 		if (isGrounded()) move();
 		else spin();
 		if (getIncomingGround() != null) reorientToLandOn();
@@ -61,11 +66,52 @@ public class PlatformerController : MonoBehaviour {
 		transform.rotation = Quaternion.FromToRotation(Vector2.up, raycast.normal);
 	}
 
+	private void forceJump() {
+		bool fingerTouching = Input.touchCount > 0;
+		print ("Fingers touching" + fingerTouching);
+		if (fingerTouching) {
+			Touch touch = Input.GetTouch (0);
+
+			print ("Touching..." + touch.phase);
+			switch (touch.phase) {
+			case TouchPhase.Began:
+				// Init jump force
+				curJumpForce = 0.0f;
+				break;
+
+			case TouchPhase.Ended:
+				// Apply jump force
+				applyJump (curJumpForce);
+				break;
+
+			default:
+				// Add to jump force
+				curJumpForce += jumpFactor;
+				print ("Jump is " + curJumpForce);
+				break;
+			}
+		}
+	}
+
 	private void applyJump() {
 		myAnimator.SetTrigger("Jump");
 		var jumpDirection = transform.up * jumpForce;
 		myRigidBody.AddForce(jumpDirection);
 	}
+
+	private void applyJump(float jumpForce) {
+		myAnimator.SetTrigger("Jump");
+		var jumpDirection = transform.up * jumpForce;
+		myRigidBody.AddForce(jumpDirection);
+	}
+
+//	/**
+//	 * forceJump
+//	 * Jumps based on how long user held down on screen
+//	 */
+//	private void forceJump() {
+//		
+//	}
 
 	private void move() {
 		var move = Input.GetAxis("Horizontal");
