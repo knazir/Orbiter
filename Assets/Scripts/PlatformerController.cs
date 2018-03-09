@@ -12,6 +12,7 @@ public class PlatformerController : MonoBehaviour {
 	private const KeyCode SPRINT = KeyCode.LeftShift;
 	private const KeyCode JUMP = KeyCode.Space;
 	private const float MOVE_EPSILON = 0.001f;
+	private const float GROUNDED_DIST = 0.8f;
 
 	[SerializeField] private float jumpForce = 500.0f;
 	[SerializeField] private float jumpFactor = 1.0f;
@@ -34,15 +35,14 @@ public class PlatformerController : MonoBehaviour {
 	}
 
 	private void Update() {
-
 //		if (getInputJump()) applyJump();
 	}
 	
 	private void FixedUpdate () {
-		forceJump ();
+		if (isGrounded()) forceJump ();
 
-		if (isGrounded()) move();
-		else spin();
+//		if (isGrounded()) move();
+//		else spin();
 		if (getIncomingGround() != null) reorientToLandOn();
 	}
 	
@@ -63,16 +63,17 @@ public class PlatformerController : MonoBehaviour {
 	private void rotateByRaycastFrom(Vector2 direction) {
 		var raycast = Physics2D.Raycast(transform.position, direction, groundDetectRadius, groundLayer);
 		if (raycast.collider == null) return;
-		transform.rotation = Quaternion.FromToRotation(Vector2.up, raycast.normal);
+		// only rotate if further than a certain distance
+		if (raycast.distance > GROUNDED_DIST) {
+			transform.rotation = Quaternion.FromToRotation (Vector2.up, raycast.normal);
+		}
 	}
 
 	private void forceJump() {
 		bool fingerTouching = Input.touchCount > 0;
-		print ("Fingers touching" + fingerTouching);
 		if (fingerTouching) {
 			Touch touch = Input.GetTouch (0);
 
-			print ("Touching..." + touch.phase);
 			switch (touch.phase) {
 			case TouchPhase.Began:
 				// Init jump force
@@ -87,7 +88,6 @@ public class PlatformerController : MonoBehaviour {
 			default:
 				// Add to jump force
 				curJumpForce += jumpFactor;
-				print ("Jump is " + curJumpForce);
 				break;
 			}
 		}
@@ -104,14 +104,6 @@ public class PlatformerController : MonoBehaviour {
 		var jumpDirection = transform.up * jumpForce;
 		myRigidBody.AddForce(jumpDirection);
 	}
-
-//	/**
-//	 * forceJump
-//	 * Jumps based on how long user held down on screen
-//	 */
-//	private void forceJump() {
-//		
-//	}
 
 	private void move() {
 		var move = Input.GetAxis("Horizontal");
