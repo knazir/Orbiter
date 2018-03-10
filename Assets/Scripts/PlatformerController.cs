@@ -12,6 +12,8 @@ public class PlatformerController : MonoBehaviour {
 	private const KeyCode SPRINT = KeyCode.LeftShift;
 	private const KeyCode JUMP = KeyCode.Space;
 	private const float MOVE_EPSILON = 0.001f;
+
+	private const float MOVE_EPSILON_TOUCH = 100.0f; // subject to change
 	private const float GROUNDED_DIST = 0.8f;
 	private const float MAX_JUMP_FORCE = 1000.0f;
 
@@ -24,6 +26,8 @@ public class PlatformerController : MonoBehaviour {
 	[SerializeField] private float groundRayLength = 1.0f;
 
 	private float curJumpForce = 0.0f;
+	private float curTotalTouchDelta = 0.0f;
+
 	private bool facingRight = true;
 	private Rigidbody2D myRigidBody;
 	private Animator myAnimator;
@@ -40,9 +44,11 @@ public class PlatformerController : MonoBehaviour {
 	}
 	
 	private void FixedUpdate () {
-		if (isGrounded()) forceJump ();
+		if (isGrounded ()) {
+			moveOrJump ();
+//			move ();
+		}
 
-//		if (isGrounded()) move();
 //		else spin();
 		if (getIncomingGround() != null) reorientToLandOn();
 	}
@@ -70,45 +76,72 @@ public class PlatformerController : MonoBehaviour {
 		}
 	}
 
-	private void forceJump() {
+	/// <summary>
+	/// Transforms touch input to a move or jump.
+	/// </summary>
+	private void moveOrJump() {
 		bool fingerTouching = Input.touchCount > 0;
-		if (fingerTouching) {
-			Touch touch = Input.GetTouch (0);
+		if (!fingerTouching) return; // action can only happen if there is a finger touching screen
+	
+		Touch touch = Input.GetTouch (0); // TODO: tag by finger ID
 
-			switch (touch.phase) {
-			case TouchPhase.Began:
-				// Init jump force
-				curJumpForce = 0.0f;
-				break;
+		// Add to the total touch delta
+		if (touch.phase == TouchPhase.Moved) {
+			curTotalTouchDelta += touch.deltaPosition.x;
+		}
 
-			case TouchPhase.Ended:
-				// Apply jump force
-				applyJump (curJumpForce);
-				break;
-
-			default:
-				// Add to jump force
-				if (curJumpForce + jumpFactor > MAX_JUMP_FORCE) {
-					curJumpForce = MAX_JUMP_FORCE;
-				} else {
-					curJumpForce += jumpFactor;
-				}
-				break;
+		bool isDraggingRight = (touch.phase == TouchPhase.Moved && curTotalTouchDelta > MOVE_EPSILON_TOUCH);
+		bool isDraggingLeft = (touch.phase == TouchPhase.Moved && curTotalTouchDelta < -MOVE_EPSILON_TOUCH);
+		bool isHolding = (Math.Abs(curTotalTouchDelta) < MOVE_EPSILON_TOUCH);
+			
+		if (touch.phase == TouchPhase.Began) {
+			// Reinit jump force and move delta
+			curJumpForce = 0.0f;
+			curTotalTouchDelta = 0.0f;
+		} else if (touch.phase == TouchPhase.Ended) {
+			// Apply jump force
+			applyJump (curJumpForce);
+		} else if (isDraggingRight) {
+			// Touched and dragged right --> move right
+			curJumpForce = 0.0f;
+			moveRight ();
+		} else if (isDraggingLeft) {
+			// Touched and dragged left --> move left
+			curJumpForce = 0.0f;
+			moveLeft ();
+		} else if (isHolding) {
+			// Add to jump force
+			if (curJumpForce + jumpFactor > MAX_JUMP_FORCE) {
+				curJumpForce = MAX_JUMP_FORCE;
+			} else {
+				curJumpForce += jumpFactor;
 			}
 		}
 	}
 
-//	private void applyJump() {
-//		myAnimator.SetTrigger("Jump");
-//		var jumpDirection = transform.up * jumpForce;
-//		myRigidBody.AddForce(jumpDirection);
-//	}
-
 	private void applyJump(float jumpForce) {
 		myAnimator.SetTrigger("Jump");
 		var jumpDirection = transform.up * jumpForce;
-		print (jumpForce);
 		myRigidBody.AddForce(jumpDirection);
+	}
+
+	private void moveRight() {
+		move (true);
+	}
+
+	private void moveLeft() {
+		move (false);
+	}
+
+	private void move(bool moveRight) {
+		// flip orientation if we're reversing directions
+		if (moveRight && !facingRight || !moveRight && facingRight) flip();
+		int moveDirection = moveRight ? 1 : -1;
+
+		var moveVelocity = transform.right * moveDirection * moveSpeed;
+		moveVelocity.y = myRigidBody.velocity.y;
+		moveVelocity.z = 0.0f;
+		myRigidBody.velocity = moveVelocity;
 	}
 
 	private void move() {
