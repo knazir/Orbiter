@@ -13,8 +13,9 @@ public class PlatformerController : MonoBehaviour {
 	private const KeyCode JUMP = KeyCode.Space;
 	private const float MOVE_EPSILON = 0.001f;
 	private const float GROUNDED_DIST = 0.8f;
+	private const float MAX_JUMP_FORCE = 1000.0f;
 
-	[SerializeField] private float jumpForce = 500.0f;
+//	[SerializeField] private float jumpForce = 500.0f;
 	[SerializeField] private float jumpFactor = 1.0f;
 	[SerializeField] private float moveSpeed = 5.0f;
 	[SerializeField] private float rotateSpeed = 5.0f;
@@ -48,10 +49,10 @@ public class PlatformerController : MonoBehaviour {
 	
 	//////////////////// Helper Methods ////////////////////////
 	
-	private bool getInputJump() {
-		// check keyboard input or if there's at least one finger touching
-		return Input.GetKeyDown(JUMP) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began);
-	}
+//	private bool getInputJump() {
+//		// check keyboard input or if there's at least one finger touching
+//		return Input.GetKeyDown(JUMP) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began);
+//	}
 
 	private void reorientToLandOn() {
 		rotateByRaycastFrom(-transform.up);		// down
@@ -87,21 +88,26 @@ public class PlatformerController : MonoBehaviour {
 
 			default:
 				// Add to jump force
-				curJumpForce += jumpFactor;
+				if (curJumpForce + jumpFactor > MAX_JUMP_FORCE) {
+					curJumpForce = MAX_JUMP_FORCE;
+				} else {
+					curJumpForce += jumpFactor;
+				}
 				break;
 			}
 		}
 	}
 
-	private void applyJump() {
-		myAnimator.SetTrigger("Jump");
-		var jumpDirection = transform.up * jumpForce;
-		myRigidBody.AddForce(jumpDirection);
-	}
+//	private void applyJump() {
+//		myAnimator.SetTrigger("Jump");
+//		var jumpDirection = transform.up * jumpForce;
+//		myRigidBody.AddForce(jumpDirection);
+//	}
 
 	private void applyJump(float jumpForce) {
 		myAnimator.SetTrigger("Jump");
 		var jumpDirection = transform.up * jumpForce;
+		print (jumpForce);
 		myRigidBody.AddForce(jumpDirection);
 	}
 
@@ -147,5 +153,10 @@ public class PlatformerController : MonoBehaviour {
 		var direction = -transform.up;
 		var raycastHit = Physics2D.Raycast(transform.position, direction, groundRayLength, groundLayer);
 		return raycastHit.collider != null;
+	}
+
+	//////////////////// Accessor Methods ////////////////////////
+	public float getJumpForce() {
+		return curJumpForce;
 	}
 }
