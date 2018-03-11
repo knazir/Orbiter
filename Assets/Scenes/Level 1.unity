@@ -77,15 +77,18 @@ LightmapSettings:
     m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 500
     m_PVRBounces: 2
-    m_PVRFiltering: 0
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
     m_PVRFilteringMode: 1
     m_PVRCulling: 1
     m_PVRFilteringGaussRadiusDirect: 1
     m_PVRFilteringGaussRadiusIndirect: 5
     m_PVRFilteringGaussRadiusAO: 2
-    m_PVRFilteringAtrousColorSigma: 1
-    m_PVRFilteringAtrousNormalSigma: 1
-    m_PVRFilteringAtrousPositionSigma: 1
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -107,6 +110,8 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    debug:
+      m_Flags: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1 &34747082
 GameObject:
@@ -219,6 +224,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -234,6 +240,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -285,10 +292,6 @@ GameObject:
   m_Component:
   - component: {fileID: 51365410}
   - component: {fileID: 51365411}
-  - component: {fileID: 51365414}
-  - component: {fileID: 51365413}
-  - component: {fileID: 51365412}
-  - component: {fileID: 51365415}
   m_Layer: 0
   m_Name: earth-like
   m_TagString: Untagged
@@ -318,6 +321,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -333,6 +337,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -369,35 +374,10 @@ GameObject:
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!114 &60331435
-  m_GameObject: {fileID: 51365409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5271d1ce0c3518e458a2c4463e2c44d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  angularVelocity: 1
-  rotateRight: 1
---- !u!50 &51365413
-Rigidbody2D:
-  serializedVersion: 4
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 51365409}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
---- !u!114 &51365414
   m_GameObject: {fileID: 60331434}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -412,27 +392,10 @@ Rigidbody2D:
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
 --- !u!114 &60331436
-  m_GameObject: {fileID: 51365409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49d7a7a6ddefe824c99e147f44adc324, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!58 &51365415
-CircleCollider2D:
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 51365409}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.00000047683716}
-  serializedVersion: 2
-  m_Radius: 1.28
   m_GameObject: {fileID: 60331434}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -455,7 +418,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
->>>>>>> a1b7b3b3269f45cc63e73c93852bc12e64f28058
 --- !u!1 &158751412
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,7 +467,6 @@ GameObject:
   - component: {fileID: 616383324}
   - component: {fileID: 616383323}
   - component: {fileID: 616383322}
-  - component: {fileID: 616383325}
   m_Layer: 0
   m_Name: Lava PLanet
   m_TagString: Untagged
@@ -522,6 +483,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -537,6 +499,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -588,7 +551,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 3
->>>>>>> a1b7b3b3269f45cc63e73c93852bc12e64f28058
 --- !u!114 &616383323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -615,19 +577,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.000000029802322}
   serializedVersion: 2
   m_Radius: 1
---- !u!114 &616383325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 616383319}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5271d1ce0c3518e458a2c4463e2c44d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  angularVelocity: 1
-  rotateRight: 1
 --- !u!1 &647470008
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,7 +589,6 @@ GameObject:
   - component: {fileID: 647470012}
   - component: {fileID: 647470011}
   - component: {fileID: 647470010}
-  - component: {fileID: 647470014}
   m_Layer: 8
   m_Name: Ice Planet (5)
   m_TagString: Untagged
@@ -716,6 +664,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -731,6 +680,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -825,14 +775,10 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 714977973}
 --- !u!114 &714977977
-  m_GameObject: {fileID: 647470008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5271d1ce0c3518e458a2c4463e2c44d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  angularVelocity: 1
-  rotateRight: 1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 714977973}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -849,9 +795,6 @@ GameObject:
   m_Component:
   - component: {fileID: 786344562}
   - component: {fileID: 786344563}
-  - component: {fileID: 786344565}
-  - component: {fileID: 786344564}
-  - component: {fileID: 786344566}
   m_Layer: 0
   m_Name: Sun
   m_TagString: Untagged
@@ -881,6 +824,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -896,6 +840,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -914,50 +859,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!50 &786344564
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 786344561}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
---- !u!114 &786344565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 786344561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5271d1ce0c3518e458a2c4463e2c44d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  angularVelocity: 1
-  rotateRight: 1
---- !u!114 &786344566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 786344561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49d7a7a6ddefe824c99e147f44adc324, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &966892314
 GameObject:
   m_ObjectHideFlags: 0
@@ -996,6 +897,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1011,6 +913,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -1041,7 +944,6 @@ GameObject:
   - component: {fileID: 1012089767}
   - component: {fileID: 1012089766}
   - component: {fileID: 1012089765}
-  - component: {fileID: 1012089769}
   m_Layer: 8
   m_Name: Ice Planet (4)
   m_TagString: Untagged
@@ -1117,6 +1019,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1132,6 +1035,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -1150,19 +1054,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!114 &1012089769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1012089763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5271d1ce0c3518e458a2c4463e2c44d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  angularVelocity: 1
-  rotateRight: 1
 --- !u!1 &1099498222
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,6 +1092,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1216,6 +1108,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -1287,7 +1180,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 13
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1298,11 +1191,11 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
 --- !u!4 &1295251192
 Transform:
   m_ObjectHideFlags: 0
@@ -1328,8 +1221,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 34747089}
-  zoomInSize: 10
-  zoomOutSize: 20
 --- !u!1 &1441705565
 GameObject:
   m_ObjectHideFlags: 0
@@ -1342,7 +1233,6 @@ GameObject:
   - component: {fileID: 1441705569}
   - component: {fileID: 1441705568}
   - component: {fileID: 1441705567}
-  - component: {fileID: 1441705571}
   m_Layer: 8
   m_Name: Ice Planet (2)
   m_TagString: Untagged
@@ -1418,6 +1308,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1433,6 +1324,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -1486,14 +1378,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
 --- !u!114 &1662176615
-  m_GameObject: {fileID: 1441705565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5271d1ce0c3518e458a2c4463e2c44d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  angularVelocity: 1
-  rotateRight: 1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1662176613}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -1549,7 +1437,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
->>>>>>> a1b7b3b3269f45cc63e73c93852bc12e64f28058
 --- !u!1 &1673510697
 GameObject:
   m_ObjectHideFlags: 0
@@ -1562,7 +1449,6 @@ GameObject:
   - component: {fileID: 1673510701}
   - component: {fileID: 1673510700}
   - component: {fileID: 1673510699}
-  - component: {fileID: 1673510703}
   m_Layer: 8
   m_Name: Ice Planet (1)
   m_TagString: Untagged
@@ -1638,6 +1524,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1653,6 +1540,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -1671,19 +1559,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!114 &1673510703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1673510697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5271d1ce0c3518e458a2c4463e2c44d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  angularVelocity: 1
-  rotateRight: 1
 --- !u!1 &1834817294
 GameObject:
   m_ObjectHideFlags: 0
@@ -1696,7 +1571,6 @@ GameObject:
   - component: {fileID: 1834817297}
   - component: {fileID: 1834817298}
   - component: {fileID: 1834817299}
-  - component: {fileID: 1834817300}
   m_Layer: 8
   m_Name: Ice Planet
   m_TagString: Untagged
@@ -1713,6 +1587,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1728,6 +1603,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -1805,19 +1681,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
---- !u!114 &1834817300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1834817294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5271d1ce0c3518e458a2c4463e2c44d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  angularVelocity: 1
-  rotateRight: 1
 --- !u!1 &2016816284
 GameObject:
   m_ObjectHideFlags: 0
@@ -1860,7 +1723,6 @@ GameObject:
   - component: {fileID: 2144144343}
   - component: {fileID: 2144144342}
   - component: {fileID: 2144144341}
-  - component: {fileID: 2144144345}
   m_Layer: 8
   m_Name: Ice Planet (3)
   m_TagString: Untagged
@@ -1936,6 +1798,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1951,6 +1814,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -1969,16 +1833,3 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!114 &2144144345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2144144339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5271d1ce0c3518e458a2c4463e2c44d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  angularVelocity: 1
-  rotateRight: 1
