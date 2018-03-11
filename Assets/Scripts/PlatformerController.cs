@@ -25,25 +25,30 @@ public class PlatformerController : MonoBehaviour {
 	private bool facingRight = true;
 	private Rigidbody2D myRigidBody;
 	private Animator myAnimator;
+	private CameraController cameraController;
 
 	//////////////////// Unity Event Handlers ////////////////////
 	
 	private void Start () {
 		myRigidBody = GetComponent<Rigidbody2D>();
 		myAnimator = GetComponent<Animator>();
+		cameraController = FindObjectOfType<CameraController>();
 	}
 
 	private void Update() {
-
-//		if (getInputJump()) applyJump();
+		if (getInputJump()) applyJump();
 	}
 	
 	private void FixedUpdate () {
-		forceJump ();
-
+		// forceJump();
 		if (isGrounded()) move();
 		else spin();
-		if (getIncomingGround() != null) reorientToLandOn();
+		if (getIncomingGround() != null) {
+			reorientToLandOn();
+			// cameraController.ZoomOut();
+		} else {
+			// cameraController.ZoomIn();
+		}
 	}
 	
 	//////////////////// Helper Methods ////////////////////////
@@ -70,7 +75,7 @@ public class PlatformerController : MonoBehaviour {
 		bool fingerTouching = Input.touchCount > 0;
 		print ("Fingers touching" + fingerTouching);
 		if (fingerTouching) {
-			Touch touch = Input.GetTouch (0);
+			Touch touch = Input.GetTouch(0);
 
 			print ("Touching..." + touch.phase);
 			switch (touch.phase) {
@@ -81,13 +86,13 @@ public class PlatformerController : MonoBehaviour {
 
 			case TouchPhase.Ended:
 				// Apply jump force
-				applyJump (curJumpForce);
+				applyJump(curJumpForce);
 				break;
 
 			default:
 				// Add to jump force
 				curJumpForce += jumpFactor;
-				print ("Jump is " + curJumpForce);
+				print("Jump is " + curJumpForce);
 				break;
 			}
 		}
@@ -97,6 +102,7 @@ public class PlatformerController : MonoBehaviour {
 		myAnimator.SetTrigger("Jump");
 		var jumpDirection = transform.up * jumpForce;
 		myRigidBody.AddForce(jumpDirection);
+		myRigidBody.angularVelocity = 0.0f;
 	}
 
 	private void applyJump(float jumpForce) {

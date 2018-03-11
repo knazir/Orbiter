@@ -5,6 +5,8 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
 
 	[SerializeField] private Transform player;
+	[SerializeField] private float zoomInSize = 10.0f;
+	[SerializeField] private float zoomOutSize = 20.0f;
 
 	private bool followPlayer;
 	private Vector3 offset;
@@ -18,12 +20,25 @@ public class CameraController : MonoBehaviour {
 		followPlayer = true;
 	}
 
+	public void ZoomOut() {
+		Camera.main.orthographicSize = zoomOutSize;
+	}
+
+	public void ZoomIn() {
+		Camera.main.orthographicSize = zoomInSize;
+	}
+
 	private void Start() {
 		followPlayer = true;
 		transform.position = new Vector3(player.position.x, player.position.y, transform.position.z);
 		
 		// TODO: Figure out if we want some kind of offset (redundant for now)
 		offset = transform.position - player.position;
+	}
+	
+
+	private void Update() {		
+
 	}
 	
 	// Called after each Update every frame

@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotateCelestialBody : MonoBehaviour {
+public class Planet : MonoBehaviour {
+	
+	private const float MASS_SCALAR = 100.0f;
 
 	[SerializeField] private float angularVelocity = 1.0f;
 	[SerializeField] private bool rotateRight = true;
@@ -15,6 +17,7 @@ public class RotateCelestialBody : MonoBehaviour {
 		myRigidbody = GetComponent<Rigidbody2D>();
 		actualAngularVelocity = angularVelocity;
 		if (rotateRight) actualAngularVelocity *= -1;
+		myRigidbody.mass = MASS_SCALAR * transform.localScale.x;
 	}
 	
 	private void FixedUpdate () {
