@@ -45,13 +45,13 @@ public class PlatformerController : MonoBehaviour {
 	private void FixedUpdate () {
 		if (isGrounded()) {
 			handleTouchPlanetMovement();
-			//move();
+			//handleKeyboardPlanetMovement();
 			
 			// prevent endless spinning around planet when not moving
 			myRigidBody.angularVelocity = 0.0f;
 		}else {
 			handleTouchSpaceMovement();
-			//spin();
+			//handleKeyboardSpaceMovement();
 		}
 
 		if (getIncomingGround() != null) reorientToLandOn();
@@ -95,6 +95,14 @@ public class PlatformerController : MonoBehaviour {
 		}
 	}
 	
+	private void moveRight() {
+		setTouchPlanetVelocity(true);
+	}
+
+	private void moveLeft() {
+		setTouchPlanetVelocity(false);
+	}
+	
 	private void setTouchPlanetVelocity(bool moveRight) {
 		// flip orientation if we're reversing directions
 		if (moveRight && !facingRight || !moveRight && facingRight) flip();
@@ -104,15 +112,51 @@ public class PlatformerController : MonoBehaviour {
 	}
 
 	private void handleTouchSpaceMovement() {
-		
-	}
-	
-	private void moveRight() {
-		setTouchPlanetVelocity(true);
+		var fingerTouching = Input.touchCount > 0;
+		if (!fingerTouching) return; // action can only happen if there is a finger touching screen
+
+		var touch = Input.GetTouch(0); // TODO: tag by finger ID
+
+		// Add to the total touch delta
+		if (touch.phase == TouchPhase.Moved) {
+			curTotalTouchDelta += touch.deltaPosition.x;
+		}
+
+		var isDraggingRight = (touch.phase == TouchPhase.Moved && curTotalTouchDelta > MOVE_EPSILON_TOUCH);
+		var isDraggingLeft = (touch.phase == TouchPhase.Moved && curTotalTouchDelta < -MOVE_EPSILON_TOUCH);
+		var isHolding = (Math.Abs(curTotalTouchDelta) < MOVE_EPSILON_TOUCH);
+
+		if (touch.phase == TouchPhase.Began) {
+			// Reinit move delta
+			curTotalTouchDelta = 0.0f;
+		} else if (touch.phase == TouchPhase.Ended) {
+			// Apply jump force
+			applyJump(curJumpForce);
+		} else if (isDraggingRight) {
+			// Touched and dragged right --> move right
+			rotateRight();
+		} else if (isDraggingLeft) {
+			// Touched and dragged left --> move left
+			rotateLeft();
+		}
 	}
 
-	private void moveLeft() {
-		setTouchPlanetVelocity(false);
+	void rotateRight() {
+		setTouchSpaceRotation(true);
+	}
+
+	void rotateLeft() {
+		setTouchSpaceRotation(false);
+	}
+
+	void setTouchSpaceRotation(bool rotateRight) {
+		var move = rotateRight ? -1 : 1;
+		var moving = Math.Abs(move) > MOVE_EPSILON || Math.Abs(move) < -MOVE_EPSILON;
+		if (!moving) return;
+		
+		// negate rotate force to align with movement directions
+		myRigidBody.angularVelocity = 0.0f;
+		transform.Rotate(0, 0, move * rotateSpeed);
 	}
 	
 	//////////////////// Keyboard Input ////////////////////////
