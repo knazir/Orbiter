@@ -18,6 +18,7 @@ public class PlatformerController : MonoBehaviour {
 	private const float MAX_JUMP_FORCE = 1000.0f;
 
 	[SerializeField] private float defaultJumpForce = 500.0f;
+	[SerializeField] private float defaultBoostForce = 250.0f;
 	[SerializeField] private float jumpFactor = 1.0f;
 	[SerializeField] private float moveSpeed = 5.0f;
 	[SerializeField] private float rotateSpeed = 5.0f;
@@ -27,37 +28,52 @@ public class PlatformerController : MonoBehaviour {
 
 	private Rigidbody2D myRigidBody;
 	private Animator myAnimator;
+	private TouchButtonHandler touchButtonHandler;
 	private bool facingRight = true;
 	private float curJumpForce = 0.0f;
 	private float curTotalTouchDelta = 0.0f;
+	private bool moving = false;
+	private bool movingRight = true;
 
 	//////////////////// Unity Event Handlers ////////////////////
 	
 	private void Start () {
 		myRigidBody = GetComponent<Rigidbody2D>();
 		myAnimator = GetComponent<Animator>();
+		touchButtonHandler = FindObjectOfType<TouchButtonHandler>();
 	}
 
 	private void Update() {
-		 // if (getInputJump()) applyJump(defaultJumpForce);
+		 if (getInputJump() && !touchButtonHandler.ButtonPressed()) applyJump(defaultJumpForce);
 	}
 	
 	private void FixedUpdate () {
-		if (isGrounded()) {
-			handleTouchPlanetMovement();
-			//handleKeyboardPlanetMovement();
-			
-			// prevent endless spinning around planet when not moving
-			myRigidBody.angularVelocity = 0.0f;
-		}else {
-			handleTouchSpaceMovement();
-			//handleKeyboardSpaceMovement();
+		if (moving) {
+			if (isGrounded()) {
+				if (movingRight) moveRight();
+				else moveLeft();
+			} else {
+				if (movingRight) rotateRight();
+				else rotateLeft();
+			}
 		}
-
+		
+		myRigidBody.angularVelocity = 0.0f;
+		
 		if (getIncomingGround() != null) reorientToLandOn();
 	}
 	
 	//////////////////// Touch Input ////////////////////////
+
+	public void touchRight() {
+		if (isGrounded()) moveRight();
+		else rotateRight();
+	}
+
+	public void touchLeft() {
+		if (isGrounded()) moveLeft();
+		else rotateLeft();
+	}
 	
 	private void handleTouchPlanetMovement() {
 		var fingerTouching = Input.touchCount > 0;
@@ -128,6 +144,7 @@ public class PlatformerController : MonoBehaviour {
 
 		if (touch.phase == TouchPhase.Began) {
 			// Reinit move delta
+			curJumpForce = defaultBoostForce;
 			curTotalTouchDelta = 0.0f;
 		} else if (touch.phase == TouchPhase.Ended) {
 			// Apply jump force
@@ -235,5 +252,15 @@ public class PlatformerController : MonoBehaviour {
 
 	public float getJumpForce() {
 		return curJumpForce;
+	}
+	
+	//////////////////// Setter Methods ////////////////////////
+
+	public void SetMoving(bool value) {
+		moving = value;
+	}
+
+	public void SetMovingRight(bool value) {
+		movingRight = value;
 	}
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Planet : MonoBehaviour {
 	
-	private const float MASS_SCALAR = 100.0f;
+	private const float MASS_SCALAR = 125.0f;
 
 	[SerializeField] private float angularVelocity = 1.0f;
 	[SerializeField] private bool rotateRight = true;

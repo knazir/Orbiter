@@ -1,3 +1,9 @@
+# MacOS
+/.DS_Store
+
+# iOS Build
+/ios/
+
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
