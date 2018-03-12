@@ -1330,6 +1330,11 @@ Prefab:
       propertyPath: angularVelocity
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 50614987870868568, guid: fd811e52082f2c04582aad6fabcbefd2,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd811e52082f2c04582aad6fabcbefd2, type: 2}
   m_IsPrefabParent: 0
