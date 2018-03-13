@@ -44,23 +44,23 @@ public class PlatformerController : MonoBehaviour {
 	}
 
 	private void Update() {
-		if (getInputJump()) applyJump(defaultJumpForce);
-		//if (getInputJump() && !touchButtonHandler.ButtonPressed()) applyJump(defaultJumpForce);
+		//if (getInputJump()) applyJump(defaultJumpForce);
+		if (getInputJump() && !touchButtonHandler.ButtonPressed()) applyJump(defaultJumpForce);
 	}
 	
 	private void FixedUpdate () {
-//		if (moving) {
-//			if (isGrounded()) {
-//				if (movingRight) moveRight();
-//				else moveLeft();
-//			} else {
-//				if (movingRight) rotateRight();
-//				else rotateLeft();
-//			}
-//		}
+		if (moving) {
+			if (isGrounded()) {
+				if (movingRight) moveRight();
+				else moveLeft();
+			} else {
+				if (movingRight) rotateRight();
+				else rotateLeft();
+			}
+		}
 		
-		if (isGrounded()) handleKeyboardPlanetMovement();
-		else handleKeyboardSpaceMovement();
+//		if (isGrounded()) handleKeyboardPlanetMovement();
+//		else handleKeyboardSpaceMovement();
 		
 		myRigidBody.angularVelocity = 0.0f;
 		
