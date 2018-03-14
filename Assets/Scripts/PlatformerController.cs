@@ -44,23 +44,23 @@ public class PlatformerController : MonoBehaviour {
 	}
 
 	private void Update() {
-		//if (getInputJump()) applyJump(defaultJumpForce);
-		if (getInputJump() && !touchButtonHandler.ButtonPressed()) applyJump(defaultJumpForce);
+		if (getInputJump()) applyJump(defaultJumpForce);
+		// if (getInputJump() && !touchButtonHandler.ButtonPressed()) applyJump(defaultJumpForce);
 	}
 	
 	private void FixedUpdate () {
-		if (moving) {
-			if (isGrounded()) {
-				if (movingRight) moveRight();
-				else moveLeft();
-			} else {
-				if (movingRight) rotateRight();
-				else rotateLeft();
-			}
-		}
+//		if (moving) {
+//			if (isGrounded()) {
+//				if (movingRight) moveRight();
+//				else moveLeft();
+//			} else {
+//				if (movingRight) rotateRight();
+//				else rotateLeft();
+//			}
+//		}
 		
-//		if (isGrounded()) handleKeyboardPlanetMovement();
-//		else handleKeyboardSpaceMovement();
+		if (isGrounded()) handleKeyboardPlanetMovement();
+		else handleKeyboardSpaceMovement();
 		
 		myRigidBody.angularVelocity = 0.0f;
 		
@@ -98,9 +98,11 @@ public class PlatformerController : MonoBehaviour {
 			// Reinit jump force and move delta
 			curJumpForce = defaultJumpForce;
 			curTotalTouchDelta = 0.0f;
+			myAnimator.SetBool("Running", true);
 		} else if (touch.phase == TouchPhase.Ended) {
 			// Apply jump force
 			applyJump(curJumpForce);
+			myAnimator.SetBool("Running", false);
 		} else if (isDraggingRight) {
 			// Touched and dragged right --> move right
 			curJumpForce = 0.0f;
