@@ -21,11 +21,11 @@ GameObject:
   - component: {fileID: 4055701336457286}
   - component: {fileID: 212034943008875010}
   - component: {fileID: 95740717362716956}
-  - component: {fileID: 61753749786417576}
   - component: {fileID: 50452652395964028}
   - component: {fileID: 114991588496102052}
   - component: {fileID: 114720788269361308}
   - component: {fileID: 82536026867993976}
+  - component: {fileID: 58286499935555214}
   m_Layer: 0
   m_Name: DummyChar
   m_TagString: Player
@@ -41,7 +41,7 @@ Transform:
   m_GameObject: {fileID: 1408598565175292}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -13.1, y: 7.5, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -66,31 +66,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!61 &61753749786417576
-BoxCollider2D:
+--- !u!58 &58286499935555214
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1408598565175292}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 54f5d1f5e6a35694db7148e73295fecd, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.010115147, y: -0.048791423}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
-    newSize: {x: 0.32, y: 0.32}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.083182335, y: 0.22003713}
-  m_EdgeRadius: 0
+  m_Radius: 1.01
 --- !u!82 &82536026867993976
 AudioSource:
   m_ObjectHideFlags: 1
@@ -180,7 +170,7 @@ Animator:
   m_GameObject: {fileID: 1408598565175292}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 63e5b5b31df58c641abcdf4f0fe01147, type: 2}
+  m_Controller: {fileID: 9100000, guid: 045a699cdbeb64e49bb95671151354f0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -199,6 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b953772a33f70c64eaa96bf43cb1fa0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxBoosts: 1
   defaultJumpForce: 400
   moveSpeed: 5
   rotateSpeed: 5
@@ -251,7 +242,7 @@ SpriteRenderer:
   m_SortingLayerID: 343072207
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ce3896766c43c4014bfc40654c783024, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 948b10d84bbc641f1bd5667c717b449a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -149,20 +149,24 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4055701336457286, guid: b61051cac6db14d1ba6cf86e1f53f296, type: 2}
       propertyPath: m_LocalScale.x
-      value: 7
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4055701336457286, guid: b61051cac6db14d1ba6cf86e1f53f296, type: 2}
       propertyPath: m_LocalScale.y
-      value: 7
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4055701336457286, guid: b61051cac6db14d1ba6cf86e1f53f296, type: 2}
       propertyPath: m_LocalScale.z
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114720788269361308, guid: b61051cac6db14d1ba6cf86e1f53f296,
         type: 2}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1408598565175292, guid: b61051cac6db14d1ba6cf86e1f53f296, type: 2}
+      propertyPath: m_Name
+      value: Character
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b61051cac6db14d1ba6cf86e1f53f296, type: 2}
@@ -475,7 +479,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Space Adventurer Thingy
+  m_Text: Orbit
 --- !u!222 &855581093
 CanvasRenderer:
   m_ObjectHideFlags: 0
