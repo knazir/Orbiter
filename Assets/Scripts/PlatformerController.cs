@@ -10,6 +10,7 @@ public class PlatformerController : MonoBehaviour {
 	private const KeyCode JUMP = KeyCode.Space;
 	private const float MOVE_EPSILON = 0.001f;
 
+	[SerializeField] private int maxBoosts = 1;
 	[SerializeField] private float defaultJumpForce = 500.0f;
 	[SerializeField] private float moveSpeed = 5.0f;
 	[SerializeField] private float rotateSpeed = 5.0f;
@@ -26,6 +27,7 @@ public class PlatformerController : MonoBehaviour {
 	private float curTotalTouchDelta = 0.0f;
 	private bool moving = false;
 	private bool movingRight = true;
+	private int boostsRemaining;
 
 	//////////////////// Unity Event Handlers ////////////////////
 	
@@ -34,18 +36,21 @@ public class PlatformerController : MonoBehaviour {
 		myAnimator = GetComponent<Animator>();
 		myAudioSource = GetComponent<AudioSource>();
 		Input.simulateMouseWithTouches = true;
+		boostsRemaining = maxBoosts;
 	}
 
 	private void Update() {
-		var grounded = isGrounded();
-		if (getInputJump()) applyJump(!grounded);
+		if (getInputJump()) applyJump(!isGrounded());
 	}
 	
 	private void FixedUpdate () {
+		var grounded = isGrounded();
+		if (grounded) boostsRemaining = maxBoosts;
+		
 		// touch controls (remove animator bool set for non-mobile testing)
 		myAnimator.SetBool("Running", moving);
 		if (moving) {
-			if (isGrounded()) {
+			if (grounded) {
 				if (movingRight) moveRight();
 				else moveLeft();
 			} else {
@@ -55,7 +60,7 @@ public class PlatformerController : MonoBehaviour {
 		}
 		
 		// keyboard controls
-		if (isGrounded()) handleKeyboardPlanetMovement();
+		if (grounded) handleKeyboardPlanetMovement();
 		else handleKeyboardSpaceMovement();
 	
 		myRigidBody.angularVelocity = 0.0f;
@@ -151,8 +156,10 @@ public class PlatformerController : MonoBehaviour {
 	}
 
 	private void applyJump(bool isBoost) {
-		myAnimator.SetTrigger("Jump");
 		if (!isBoost) myAudioSource.PlayOneShot(jumpAudio);
+		else if (boostsRemaining <= 0) return;
+		else boostsRemaining--;
+		myAnimator.SetTrigger("Jump");
 		var jumpDirection = transform.up * defaultJumpForce;
 		myRigidBody.AddForce(jumpDirection);
 		myRigidBody.angularVelocity = 0.0f;
