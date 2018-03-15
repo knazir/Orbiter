@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TouchButtonHandler : MonoBehaviour {
-
-	public static bool ButtonPressed = false;
 	
 	protected PlatformerController playerController;
 

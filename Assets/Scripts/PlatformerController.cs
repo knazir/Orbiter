@@ -38,7 +38,7 @@ public class PlatformerController : MonoBehaviour {
 
 	private void Update() {
 		var grounded = isGrounded();
-		if (getInputJump() && (grounded || TouchButtonHandler.ButtonPressed)) applyJump(!grounded);
+		if (getInputJump()) applyJump(!grounded);
 	}
 	
 	private void FixedUpdate () {
@@ -125,11 +125,18 @@ public class PlatformerController : MonoBehaviour {
 	//////////////////// Helper Methods ////////////////////////
 	
 	private bool getInputJump() {
-		// check keyboard input or if there's at least one finger touching
-		var touch = (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began);
-		var touchingGuiElement = EventSystem.current.IsPointerOverGameObject();
-		Debug.Log("Touching GUI Element: " + touchingGuiElement);
-		return !touchingGuiElement && (Input.GetKeyDown(JUMP) || touch);
+		// check keyboard input
+		if (Input.GetKeyDown(JUMP)) return true;
+		
+		// check if there's at least one finger touching
+		for (var i = 0; i < Input.touchCount; i++) {
+			var touchingGuiElement = EventSystem.current.IsPointerOverGameObject(Input.GetTouch(i).fingerId);
+			if (Input.GetTouch(i).phase == TouchPhase.Began && !touchingGuiElement) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private void reorientToLandOn() {
