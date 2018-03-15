@@ -48,7 +48,7 @@ public class PlatformerController : MonoBehaviour {
 		if (grounded) boostsRemaining = maxBoosts;
 		
 		// touch controls (remove animator bool set for non-mobile testing)
-		myAnimator.SetBool("Running", moving);
+		myAnimator.SetBool("Running", grounded && moving);
 		if (moving) {
 			if (grounded) {
 				if (movingRight) moveRight();
