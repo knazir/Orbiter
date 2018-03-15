@@ -42,7 +42,7 @@ public class PlatformerController : MonoBehaviour {
 	}
 	
 	private void FixedUpdate () {
-		// touch controls
+		// touch controls (remove animator bool set for non-mobile testing)
 		myAnimator.SetBool("Running", moving);
 		if (moving) {
 			if (isGrounded()) {
@@ -100,9 +100,8 @@ public class PlatformerController : MonoBehaviour {
 	
 	private void handleKeyboardPlanetMovement() {
 		var move = Input.GetAxis("Horizontal");
-		var moving = Math.Abs(move) > MOVE_EPSILON || Math.Abs(move) < -MOVE_EPSILON;
-		myAnimator.SetBool("Running", moving);
-		if (!moving) return;
+		var isMoving = Math.Abs(move) > MOVE_EPSILON || Math.Abs(move) < -MOVE_EPSILON;
+		if (!isMoving) return;
 		
 		// flip orientation if we're reversing directions
 		if (move > 0 && !facingRight || move < 0 && facingRight) flip();
@@ -135,7 +134,6 @@ public class PlatformerController : MonoBehaviour {
 				return true;
 			}
 		}
-
 		return false;
 	}
 
