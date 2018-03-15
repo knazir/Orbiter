@@ -156,9 +156,11 @@ public class PlatformerController : MonoBehaviour {
 	}
 
 	private void applyJump(bool isBoost) {
-		if (!isBoost) myAudioSource.PlayOneShot(jumpAudio);
-		else if (boostsRemaining <= 0) return;
-		else boostsRemaining--;
+		if (isBoost) {
+			if (boostsRemaining <= 0) return;
+			boostsRemaining--;
+		}
+		myAudioSource.PlayOneShot(jumpAudio);
 		myAnimator.SetTrigger("Jump");
 		var jumpDirection = transform.up * defaultJumpForce;
 		myRigidBody.AddForce(jumpDirection);
