@@ -12,15 +12,21 @@ public class OrbitNoRotate : MonoBehaviour {
 	[SerializeField] private Transform end;
 	[SerializeField] private float orbitSpeed = 0.01f;
 
-	private const float behindPlanetZPos = 0.1f;
-	private const float frontPlanetZPos = -0.1f;
+	private const string TRIGGER_NAME = "Planet Trigger";
+
+	private const float behindPlanetZPos = 1f;
+	private const float besidePlanetZPos = 0.0f;
+	private const float frontPlanetZPos = -1f;
 	private bool atPlanet = false;
 	private bool movingToEnd = true;
 
-	private float besidePlanetZPos;
+	private Renderer orbiterRenderer;
 
 	void Start() {
-		besidePlanetZPos = transform.position.z;
+		// Ignore collisions between orbitting planet and moon
+		Physics2D.IgnoreCollision(GetComponent<Collider2D>(), transform.parent.parent.gameObject.GetComponent<Collider2D>());
+
+		orbiterRenderer = GetComponent<Renderer> ();
 	}
 
 	void Update() {
@@ -31,24 +37,27 @@ public class OrbitNoRotate : MonoBehaviour {
 		
 		if (shouldBeBehindPlanet) {
 			transform.localPosition = new Vector3 (nextPosXY.x, nextPosXY.y, behindPlanetZPos);
+			orbiterRenderer.enabled = false;
 		} else if (atPlanet && !shouldBeBehindPlanet) {
 			transform.localPosition = new Vector3 (nextPosXY.x, nextPosXY.y, frontPlanetZPos);
+			orbiterRenderer.enabled = true;
 		} else {
-			transform.localPosition = nextPosXY;
+			transform.localPosition = new Vector3 (nextPosXY.x, nextPosXY.y, besidePlanetZPos);
+			orbiterRenderer.enabled = true;
 		}
 	}
 
 	void OnTriggerEnter2D(Collider2D col) {
 		GameObject ancestorObject = transform.parent.parent.gameObject;
-		if (col.gameObject.name == ancestorObject.name) {
+		if (col.gameObject.name == TRIGGER_NAME) {
 			// Move moon behind parent planet
 			atPlanet = true;
 		}
 	}
 
-	void OnTriggerExit(Collider col) {
-		GameObject ancestorObject = transform.parent.parent.gameObject;
-		if (col.gameObject.name == ancestorObject.name) {
+	void OnTriggerExit2D(Collider2D col) {
+//		GameObject ancestorObject = transform.parent.parent.gameObject;
+		if (col.gameObject.name == TRIGGER_NAME) {
 			// No longer behind
 			atPlanet = false;
 		}
