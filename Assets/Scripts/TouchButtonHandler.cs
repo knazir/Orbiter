@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class TouchButtonHandler : MonoBehaviour {
 
-	protected static bool buttonPressed = false;
+	public static bool ButtonPressed = false;
 	
 	protected PlatformerController playerController;
 
 	private void Start () {
 		playerController = FindObjectOfType<PlatformerController>();
-	}
-
-	public bool ButtonPressed() {
-		return buttonPressed;
 	}
 }

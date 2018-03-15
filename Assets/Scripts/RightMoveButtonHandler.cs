@@ -5,13 +5,13 @@ using UnityEngine;
 public class RightMoveButtonHandler : TouchButtonHandler {
 	
 	public void onPress() {
-		buttonPressed = true;
+		ButtonPressed = true;
 		playerController.SetMoving(true);
 		playerController.SetMovingRight(true);
 	}
 
 	public void onRelease() {
-		buttonPressed = false;
+		ButtonPressed = false;
 		playerController.SetMoving(false);
 	}
 }

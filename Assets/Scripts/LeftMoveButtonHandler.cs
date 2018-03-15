@@ -1,18 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class LeftMoveButtonHandler : TouchButtonHandler {
 	
 	public void onPress() {
-		if (buttonPressed) return;
-		buttonPressed = true;
+		if (ButtonPressed) return;
+		ButtonPressed = true;
 		playerController.SetMoving(true);
 		playerController.SetMovingRight(false);
 	}
 
 	public void onRelease() {
-		buttonPressed = false;
+		ButtonPressed = false;
 		playerController.SetMoving(false);
 	}
 }

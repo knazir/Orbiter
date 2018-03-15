@@ -2,33 +2,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlatformerController : MonoBehaviour {
 
 	private const KeyCode JUMP = KeyCode.Space;
 	private const float MOVE_EPSILON = 0.001f;
 
-	private const float MOVE_EPSILON_TOUCH = 100.0f; // subject to change
-	private const float ALIGNMENT_EPSILON = 1.0f;
-	private const float GROUNDED_DIST = 0.8f;
-	private const float MAX_JUMP_FORCE = 1000.0f;
-
 	[SerializeField] private float defaultJumpForce = 500.0f;
-	[SerializeField] private float defaultBoostForce = 250.0f;
-	[SerializeField] private float jumpFactor = 1.0f;
 	[SerializeField] private float moveSpeed = 5.0f;
 	[SerializeField] private float rotateSpeed = 5.0f;
 	[SerializeField] private LayerMask groundLayer;
 	[SerializeField] private float groundDetectRadius = 1.0f;
 	[SerializeField] private float groundRayLength = 1.0f;
+	[SerializeField] private AudioClip jumpAudio;
 
 	private Rigidbody2D myRigidBody;
 	private Animator myAnimator;
-	private TouchButtonHandler touchButtonHandler;
+	private AudioSource myAudioSource;
 	private bool facingRight = true;
 	private float curJumpForce = 0.0f;
 	private float curTotalTouchDelta = 0.0f;
@@ -40,82 +32,38 @@ public class PlatformerController : MonoBehaviour {
 	private void Start () {
 		myRigidBody = GetComponent<Rigidbody2D>();
 		myAnimator = GetComponent<Animator>();
-		touchButtonHandler = FindObjectOfType<TouchButtonHandler>();
+		myAudioSource = GetComponent<AudioSource>();
+		Input.simulateMouseWithTouches = true;
 	}
 
 	private void Update() {
-		if (getInputJump()) applyJump(defaultJumpForce);
-		// if (getInputJump() && !touchButtonHandler.ButtonPressed()) applyJump(defaultJumpForce);
+		var grounded = isGrounded();
+		if (getInputJump() && (grounded || TouchButtonHandler.ButtonPressed)) applyJump(!grounded);
 	}
 	
 	private void FixedUpdate () {
-//		if (moving) {
-//			if (isGrounded()) {
-//				if (movingRight) moveRight();
-//				else moveLeft();
-//			} else {
-//				if (movingRight) rotateRight();
-//				else rotateLeft();
-//			}
-//		}
+		// touch controls
+		myAnimator.SetBool("Running", moving);
+		if (moving) {
+			if (isGrounded()) {
+				if (movingRight) moveRight();
+				else moveLeft();
+			} else {
+				if (movingRight) rotateRight();
+				else rotateLeft();
+			}
+		}
 		
+		// keyboard controls
 		if (isGrounded()) handleKeyboardPlanetMovement();
 		else handleKeyboardSpaceMovement();
-		
+	
 		myRigidBody.angularVelocity = 0.0f;
 		
 		if (getIncomingGround() != null) reorientToLandOn();
 	}
 	
 	//////////////////// Touch Input ////////////////////////
-
-	public void touchRight() {
-		if (isGrounded()) moveRight();
-		else rotateRight();
-	}
-
-	public void touchLeft() {
-		if (isGrounded()) moveLeft();
-		else rotateLeft();
-	}
-	
-	private void handleTouchPlanetMovement() {
-		var fingerTouching = Input.touchCount > 0;
-		if (!fingerTouching) return; // action can only happen if there is a finger touching screen
-	
-		var touch = Input.GetTouch (0); // TODO: tag by finger ID
-
-		// Add to the total touch delta
-		if (touch.phase == TouchPhase.Moved) {
-			curTotalTouchDelta += touch.deltaPosition.x;
-		}
-
-		var isDraggingRight = (touch.phase == TouchPhase.Moved && curTotalTouchDelta > MOVE_EPSILON_TOUCH);
-		var isDraggingLeft = (touch.phase == TouchPhase.Moved && curTotalTouchDelta < -MOVE_EPSILON_TOUCH);
-		var isHolding = (Math.Abs(curTotalTouchDelta) < MOVE_EPSILON_TOUCH);
-			
-		if (touch.phase == TouchPhase.Began) {
-			// Reinit jump force and move delta
-			curJumpForce = defaultJumpForce;
-			curTotalTouchDelta = 0.0f;
-			myAnimator.SetBool("Running", true);
-		} else if (touch.phase == TouchPhase.Ended) {
-			// Apply jump force
-			applyJump(curJumpForce);
-			myAnimator.SetBool("Running", false);
-		} else if (isDraggingRight) {
-			// Touched and dragged right --> move right
-			curJumpForce = 0.0f;
-			moveRight();
-		} else if (isDraggingLeft) {
-			// Touched and dragged left --> move left
-			curJumpForce = 0.0f;
-			moveLeft();
-		} else if (isHolding) {
-			// Add to jump force
-			curJumpForce = Mathf.Min(curJumpForce + jumpFactor, MAX_JUMP_FORCE);
-		}
-	}
 	
 	private void moveRight() {
 		setTouchPlanetVelocity(true);
@@ -133,37 +81,6 @@ public class PlatformerController : MonoBehaviour {
 		myRigidBody.velocity = moveVelocity;
 	}
 
-	private void handleTouchSpaceMovement() {
-		var fingerTouching = Input.touchCount > 0;
-		if (!fingerTouching) return; // action can only happen if there is a finger touching screen
-
-		var touch = Input.GetTouch(0); // TODO: tag by finger ID
-
-		// Add to the total touch delta
-		if (touch.phase == TouchPhase.Moved) {
-			curTotalTouchDelta += touch.deltaPosition.x;
-		}
-
-		var isDraggingRight = (touch.phase == TouchPhase.Moved && curTotalTouchDelta > MOVE_EPSILON_TOUCH);
-		var isDraggingLeft = (touch.phase == TouchPhase.Moved && curTotalTouchDelta < -MOVE_EPSILON_TOUCH);
-		var isHolding = (Math.Abs(curTotalTouchDelta) < MOVE_EPSILON_TOUCH);
-
-		if (touch.phase == TouchPhase.Began) {
-			// Reinit move delta
-			curJumpForce = defaultBoostForce;
-			curTotalTouchDelta = 0.0f;
-		} else if (touch.phase == TouchPhase.Ended) {
-			// Apply jump force
-			applyJump(curJumpForce);
-		} else if (isDraggingRight) {
-			// Touched and dragged right --> move right
-			rotateRight();
-		} else if (isDraggingLeft) {
-			// Touched and dragged left --> move left
-			rotateLeft();
-		}
-	}
-
 	void rotateRight() {
 		setTouchSpaceRotation(true);
 	}
@@ -174,9 +91,6 @@ public class PlatformerController : MonoBehaviour {
 
 	void setTouchSpaceRotation(bool rotateRight) {
 		var move = rotateRight ? -1 : 1;
-		var moving = Math.Abs(move) > MOVE_EPSILON || Math.Abs(move) < -MOVE_EPSILON;
-		if (!moving) return;
-		
 		// negate rotate force to align with movement directions
 		myRigidBody.angularVelocity = 0.0f;
 		transform.Rotate(0, 0, move * rotateSpeed);
@@ -200,8 +114,8 @@ public class PlatformerController : MonoBehaviour {
 	
 	private void handleKeyboardSpaceMovement() {
 		var move = Input.GetAxis("Horizontal");
-		var moving = Math.Abs(move) > MOVE_EPSILON || Math.Abs(move) < -MOVE_EPSILON;
-		if (!moving) return;
+		var isMoving = Math.Abs(move) > MOVE_EPSILON || Math.Abs(move) < -MOVE_EPSILON;
+		if (!isMoving) return;
 		
 		// negate rotate force to align with movement directions
 		myRigidBody.angularVelocity = 0.0f;
@@ -212,7 +126,10 @@ public class PlatformerController : MonoBehaviour {
 	
 	private bool getInputJump() {
 		// check keyboard input or if there's at least one finger touching
-		return Input.GetKeyDown(JUMP) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began);
+		var touch = (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began);
+		var touchingGuiElement = EventSystem.current.IsPointerOverGameObject();
+		Debug.Log("Touching GUI Element: " + touchingGuiElement);
+		return !touchingGuiElement && (Input.GetKeyDown(JUMP) || touch);
 	}
 
 	private void reorientToLandOn() {
@@ -228,9 +145,10 @@ public class PlatformerController : MonoBehaviour {
 		transform.rotation = Quaternion.FromToRotation(Vector2.up, raycast.normal);
 	}
 
-	private void applyJump(float jumpForce) {
+	private void applyJump(bool isBoost) {
 		myAnimator.SetTrigger("Jump");
-		var jumpDirection = transform.up * jumpForce;
+		if (!isBoost) myAudioSource.PlayOneShot(jumpAudio);
+		var jumpDirection = transform.up * defaultJumpForce;
 		myRigidBody.AddForce(jumpDirection);
 		myRigidBody.angularVelocity = 0.0f;
 	}
@@ -254,12 +172,6 @@ public class PlatformerController : MonoBehaviour {
 		return raycastHit.collider != null;
 	}
 
-	//////////////////// Accessor Methods ////////////////////////
-
-	public float getJumpForce() {
-		return curJumpForce;
-	}
-	
 	//////////////////// Setter Methods ////////////////////////
 
 	public void SetMoving(bool value) {
