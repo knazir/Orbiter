@@ -13,6 +13,7 @@ public class OrbitNoRotate : MonoBehaviour {
 	[SerializeField] private float orbitSpeed = 0.01f;
 
 	private const string TRIGGER_NAME = "Planet Trigger";
+	private const float ANGLE_EPSILON = 10.0f;
 
 	private const float behindPlanetZPos = 1f;
 	private const float besidePlanetZPos = 0.0f;
@@ -20,13 +21,13 @@ public class OrbitNoRotate : MonoBehaviour {
 	private bool atPlanet = false;
 	private bool movingToEnd = true;
 
-	private Renderer orbiterRenderer;
+//	private Renderer orbiterRenderer;
 
 	void Start() {
 		// Ignore collisions between orbitting planet and moon
 		Physics2D.IgnoreCollision(GetComponent<Collider2D>(), transform.parent.parent.gameObject.GetComponent<Collider2D>());
 
-		orbiterRenderer = GetComponent<Renderer> ();
+//		orbiterRenderer = GetComponent<Renderer> ();
 	}
 
 	void Update() {
@@ -37,13 +38,13 @@ public class OrbitNoRotate : MonoBehaviour {
 		
 		if (shouldBeBehindPlanet) {
 			transform.localPosition = new Vector3 (nextPosXY.x, nextPosXY.y, behindPlanetZPos);
-			orbiterRenderer.enabled = false;
+//			orbiterRenderer.enabled = false;
 		} else if (atPlanet && !shouldBeBehindPlanet) {
 			transform.localPosition = new Vector3 (nextPosXY.x, nextPosXY.y, frontPlanetZPos);
-			orbiterRenderer.enabled = true;
+//			orbiterRenderer.enabled = true;
 		} else {
 			transform.localPosition = new Vector3 (nextPosXY.x, nextPosXY.y, besidePlanetZPos);
-			orbiterRenderer.enabled = true;
+//			orbiterRenderer.enabled = true;
 		}
 	}
 
@@ -64,7 +65,17 @@ public class OrbitNoRotate : MonoBehaviour {
 	}
 
 	bool isMovingToEnd(Vector2 prevPos, Vector2 nextPos, Vector2 start, Vector2 end) {
-		return ((end - start).normalized == (nextPos - prevPos).normalized);
+		// Checks if two vectors are close to parallel
+//		print ("End to start normalized, " + (end - start).normalized);
+//		print ("Next to prev normalized, " + (nextPos - prevPos).normalized);
+//		Vector2 epsilon = new Vector2 (0.1f, 0.1f);
+
+		Vector3 movementVec = new Vector3((nextPos - prevPos).x, (nextPos - prevPos).y, 0);
+		Vector3 forwardVec = new Vector3((end - start).x, (end - start).y, 0);
+
+		float angle = Vector3.Angle (movementVec, forwardVec);
+
+		return (angle < ANGLE_EPSILON);
 	}
 
 //	private float radius;
