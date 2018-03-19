@@ -12,14 +12,19 @@ public class OrbitMoon : MonoBehaviour {
 	[SerializeField] private Transform end;
 	[SerializeField] private float orbitSpeed = 0.01f;
 
-	private const string TRIGGER_NAME = "Planet Trigger";
-
 	private const float ANGLE_EPSILON = 10.0f;
 	private const float behindPlanetZPos = 1f;
 	private const float besidePlanetZPos = 0.0f;
 	private const float frontPlanetZPos = -1f;
 
 	private bool atPlanet = false;
+
+	void Awake() {
+//		GameObject planetTrigger = GameObject.Find("../../" + Constants.PLANET_TRIGGER);
+//		bool planetTriggerExists = (planetTrigger != null);
+//		if (!planetTriggerExists)
+//			throw new UnityException ("Missing planet trigger for" + gameObject.name);
+	}
 
 	void Start() {
 		// Ignore collisions between orbitting planet and moon
@@ -43,14 +48,14 @@ public class OrbitMoon : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col) {
 		GameObject ancestorObject = transform.parent.parent.gameObject;
-		if (col.gameObject.name == TRIGGER_NAME) {
+		if (col.gameObject.name == Constants.PLANET_TRIGGER) {
 			// Move moon behind parent planet
 			atPlanet = true;
 		}
 	}
 
 	void OnTriggerExit2D(Collider2D col) {
-		if (col.gameObject.name == TRIGGER_NAME) {
+		if (col.gameObject.name == Constants.PLANET_TRIGGER) {
 			// No longer behind
 			atPlanet = false;
 		}
