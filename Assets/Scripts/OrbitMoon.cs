@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrbitNoRotate : MonoBehaviour {
+public class OrbitMoon : MonoBehaviour {
 
 	/// <summary>
 	/// This assumes that the orbiting body is the grandchild of the body it is orbitting around.
@@ -26,7 +26,7 @@ public class OrbitNoRotate : MonoBehaviour {
 		Physics2D.IgnoreCollision(GetComponent<Collider2D>(), transform.parent.parent.gameObject.GetComponent<Collider2D>());
 	}
 
-	void Update() {
+	void FixedUpdate() {
 		Vector2 nextPosXY = Vector2.Lerp (start.localPosition, end.localPosition, Mathf.PingPong(Time.time*orbitSpeed, 1.0f));
 
 		bool shouldBeBehindPlanet = 

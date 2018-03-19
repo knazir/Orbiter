@@ -23,8 +23,8 @@ public class PlatformerController : MonoBehaviour {
 	private Animator myAnimator;
 	private AudioSource myAudioSource;
 	private bool facingRight = true;
-	private float curJumpForce = 0.0f;
-	private float curTotalTouchDelta = 0.0f;
+//	private float curJumpForce = 0.0f;
+//	private float curTotalTouchDelta = 0.0f;
 	private bool moving = false;
 	private bool movingRight = true;
 	private int boostsRemaining;
@@ -67,6 +67,27 @@ public class PlatformerController : MonoBehaviour {
 		
 		if (getIncomingGround() != null) reorientToLandOn();
 	}
+
+	private void OnCollisionEnter2D(Collision2D col) {
+		// Ride smoothly on moving bodies
+		print("Collision detected");
+		if (col.gameObject.tag == Constants.MOVING_BODY) {
+			Transform movingBody = col.transform;
+			transform.SetParent (movingBody);
+		} else {
+			print ("Parent removed");
+			// If we collide with any other planet, the ride is over
+			endRideOnMovingBody();
+		}
+	}
+
+	private void OnColllisionExit2D(Collision2D col) {
+		if (col.gameObject.tag == Constants.MOVING_BODY) {
+			endRideOnMovingBody ();
+		}
+	}
+
+
 	
 	//////////////////// Touch Input ////////////////////////
 	
@@ -127,6 +148,10 @@ public class PlatformerController : MonoBehaviour {
 	}
 	
 	//////////////////// Helper Methods ////////////////////////
+
+	private void endRideOnMovingBody() {
+		transform.SetParent (null);
+	}
 	
 	private bool getInputJump() {
 		// check keyboard input
