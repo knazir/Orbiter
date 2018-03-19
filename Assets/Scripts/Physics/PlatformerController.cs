@@ -70,12 +70,10 @@ public class PlatformerController : MonoBehaviour {
 
 	private void OnCollisionEnter2D(Collision2D col) {
 		// Ride smoothly on moving bodies
-		print("Collision detected");
 		if (col.gameObject.tag == Constants.MOVING_BODY) {
 			Transform movingBody = col.transform;
 			transform.SetParent (movingBody);
 		} else {
-			print ("Parent removed");
 			// If we collide with any other planet, the ride is over
 			endRideOnMovingBody();
 		}
