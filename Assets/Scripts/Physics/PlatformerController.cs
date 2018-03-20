@@ -12,6 +12,7 @@ public class PlatformerController : MonoBehaviour {
 
 	[SerializeField] private int maxBoosts = 1;
 	[SerializeField] private float defaultJumpForce = 500.0f;
+	[SerializeField] private int defaultJumpMult = 1000000;
 	[SerializeField] private float moveSpeed = 5.0f;
 	[SerializeField] private float rotateSpeed = 5.0f;
 	[SerializeField] private LayerMask groundLayer;
@@ -29,6 +30,8 @@ public class PlatformerController : MonoBehaviour {
 	private bool movingRight = true;
 	private int boostsRemaining;
 
+	private GameObject groundPlanet = null;
+
 	//////////////////// Unity Event Handlers ////////////////////
 	
 	private void Start () {
@@ -40,11 +43,12 @@ public class PlatformerController : MonoBehaviour {
 	}
 
 	private void Update() {
-		if (getInputJump()) applyJump(!isGrounded());
+		if (getInputJump()) applyJump(isGrounded());
 	}
 	
 	private void FixedUpdate () {
 		var grounded = isGrounded();
+
 		if (grounded) boostsRemaining = maxBoosts;
 		
 		// touch controls (remove animator bool set for non-mobile testing)
@@ -76,6 +80,10 @@ public class PlatformerController : MonoBehaviour {
 		} else {
 			// If we collide with any other planet, the ride is over
 			endRideOnMovingBody();
+		}
+
+		if (col.gameObject.tag == Constants.CELESTIAL_BODY) {
+			groundPlanet = col.gameObject;
 		}
 	}
 
@@ -178,16 +186,44 @@ public class PlatformerController : MonoBehaviour {
 		transform.rotation = Quaternion.FromToRotation(Vector2.up, raycast.normal);
 	}
 
-	private void applyJump(bool isBoost) {
-		if (isBoost) {
-			if (boostsRemaining <= 0) return;
+	private void applyJump(bool isGrounded) {
+		float jumpForce = defaultJumpForce;
+		if (!isGrounded) {
+			if (boostsRemaining <= 0)
+				return;
 			boostsRemaining--;
+		} else {
+			// Make jump force relative to planet and size
+			float planetMass = getGroundPlanetMass(isGrounded);
+			float planetRadius = getGroundPlanetRadius (isGrounded);
+			float playerMass = GetComponent<Rigidbody2D> ().mass;
+
+			jumpForce = (playerMass * planetMass * 50) / Mathf.Pow(planetRadius, 2);
+
+			float escapeVelocity = (float)Math.Pow ((2 * getJumpRatio (planetRadius, planetMass)), 0.5f);
+			jumpForce =  ((escapeVelocity/Time.deltaTime) * GetComponent<Rigidbody2D>().mass);
 		}
+
 		myAudioSource.PlayOneShot(jumpAudio);
 		myAnimator.SetTrigger("Jump");
-		var jumpDirection = transform.up * defaultJumpForce;
+		var jumpDirection = transform.up * jumpForce;
 		myRigidBody.AddForce(jumpDirection);
 		myRigidBody.angularVelocity = 0.0f;
+	}
+
+	private float getJumpRatio(float planetRadius, float planetMass) {
+		return planetMass / planetRadius;
+	}
+
+	private float getGroundPlanetMass(bool isGrounded){
+		return groundPlanet.GetComponent<Rigidbody2D> ().mass;
+	}
+
+	private float getGroundPlanetRadius(bool isGrounded){
+		var planetRigidBody = groundPlanet.GetComponent<Rigidbody2D>();
+		var direction = GetComponent<Rigidbody2D>().position - planetRigidBody.position;
+
+		return direction.magnitude;
 	}
 
 	private void flip() {
