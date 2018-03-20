@@ -9,10 +9,10 @@ public class PlatformerController : MonoBehaviour {
 
 	private const KeyCode JUMP = KeyCode.Space;
 	private const float MOVE_EPSILON = 0.001f;
+	private const float FIRST_JUMP_MULT = 1.2f;
 
 	[SerializeField] private int maxBoosts = 1;
 	[SerializeField] private float defaultJumpForce = 500.0f;
-	[SerializeField] private int defaultJumpMult = 1000000;
 	[SerializeField] private float moveSpeed = 5.0f;
 	[SerializeField] private float rotateSpeed = 5.0f;
 	[SerializeField] private LayerMask groundLayer;
@@ -29,9 +29,6 @@ public class PlatformerController : MonoBehaviour {
 	private bool moving = false;
 	private bool movingRight = true;
 	private int boostsRemaining;
-
-	private GameObject groundPlanet = null;
-
 	//////////////////// Unity Event Handlers ////////////////////
 	
 	private void Start () {
@@ -43,7 +40,8 @@ public class PlatformerController : MonoBehaviour {
 	}
 
 	private void Update() {
-		if (getInputJump()) applyJump(isGrounded());
+		GameObject groundPlanet = null;
+		if (getInputJump()) applyJump(isGrounded(ref groundPlanet), groundPlanet);
 	}
 	
 	private void FixedUpdate () {
@@ -80,10 +78,6 @@ public class PlatformerController : MonoBehaviour {
 		} else {
 			// If we collide with any other planet, the ride is over
 			endRideOnMovingBody();
-		}
-
-		if (col.gameObject.tag == Constants.CELESTIAL_BODY) {
-			groundPlanet = col.gameObject;
 		}
 	}
 
@@ -186,22 +180,15 @@ public class PlatformerController : MonoBehaviour {
 		transform.rotation = Quaternion.FromToRotation(Vector2.up, raycast.normal);
 	}
 
-	private void applyJump(bool isGrounded) {
+	private void applyJump(bool isGrounded, GameObject groundPlanet) {
 		float jumpForce = defaultJumpForce;
+
 		if (!isGrounded) {
 			if (boostsRemaining <= 0)
 				return;
 			boostsRemaining--;
 		} else {
-			// Make jump force relative to planet and size
-			float planetMass = getGroundPlanetMass(isGrounded);
-			float planetRadius = getGroundPlanetRadius (isGrounded);
-			float playerMass = GetComponent<Rigidbody2D> ().mass;
-
-			jumpForce = (playerMass * planetMass * 50) / Mathf.Pow(planetRadius, 2);
-
-			float escapeVelocity = (float)Math.Pow ((2 * getJumpRatio (planetRadius, planetMass)), 0.5f);
-			jumpForce =  ((escapeVelocity/Time.deltaTime) * GetComponent<Rigidbody2D>().mass);
+			jumpForce = getFirstJumpForce (groundPlanet);
 		}
 
 		myAudioSource.PlayOneShot(jumpAudio);
@@ -211,15 +198,23 @@ public class PlatformerController : MonoBehaviour {
 		myRigidBody.angularVelocity = 0.0f;
 	}
 
-	private float getJumpRatio(float planetRadius, float planetMass) {
-		return planetMass / planetRadius;
+	private float getFirstJumpForce(GameObject groundPlanet) {
+		// returns a jump force relative to the planet mass and radius one is on
+		float planetMass = getGroundPlanetMass(groundPlanet);
+		float planetRadius = getGroundPlanetRadius (groundPlanet);
+		float playerMass = GetComponent<Rigidbody2D> ().mass;
+
+		float escapeVelocity = (float)Math.Pow ((2 * (planetMass/planetRadius)), 0.5f);
+
+		// We need a small multiplier b/c this is a one time force while gravity is a force applied every frame
+		return  ((escapeVelocity/Time.deltaTime) * playerMass * FIRST_JUMP_MULT);
 	}
 
-	private float getGroundPlanetMass(bool isGrounded){
+	private float getGroundPlanetMass(GameObject groundPlanet){
 		return groundPlanet.GetComponent<Rigidbody2D> ().mass;
 	}
 
-	private float getGroundPlanetRadius(bool isGrounded){
+	private float getGroundPlanetRadius(GameObject groundPlanet){
 		var planetRigidBody = groundPlanet.GetComponent<Rigidbody2D>();
 		var direction = GetComponent<Rigidbody2D>().position - planetRigidBody.position;
 
@@ -240,8 +235,18 @@ public class PlatformerController : MonoBehaviour {
 	}
 
 	private bool isGrounded() {
+		GameObject groundPlanet = null;
+		return isGrounded (ref groundPlanet);
+	}
+		
+	private bool isGrounded(ref GameObject groundPlanet) {
+
 		var direction = -transform.up;
 		var raycastHit = Physics2D.Raycast(transform.position, direction, groundRayLength, groundLayer);
+
+		if (raycastHit.collider)
+			groundPlanet = raycastHit.collider.gameObject;
+		
 		return raycastHit.collider != null;
 	}
 
