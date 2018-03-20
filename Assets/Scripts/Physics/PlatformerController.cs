@@ -11,7 +11,7 @@ public class PlatformerController : MonoBehaviour {
 	private const float MOVE_EPSILON = 0.001f;
 	private const float FIRST_JUMP_MULT = 1.2f;
 
-	[SerializeField] private int maxBoosts = 1;
+//	[SerializeField] private int maxBoosts = 1;
 	[SerializeField] private float defaultJumpForce = 500.0f;
 	[SerializeField] private float moveSpeed = 5.0f;
 	[SerializeField] private float rotateSpeed = 5.0f;
@@ -23,20 +23,24 @@ public class PlatformerController : MonoBehaviour {
 	private Rigidbody2D myRigidBody;
 	private Animator myAnimator;
 	private AudioSource myAudioSource;
+	private StatsCounter myStatsCounter;
+
 	private bool facingRight = true;
 //	private float curJumpForce = 0.0f;
 //	private float curTotalTouchDelta = 0.0f;
 	private bool moving = false;
 	private bool movingRight = true;
-	private int boostsRemaining;
+//	private int boostsRemaining;
 	//////////////////// Unity Event Handlers ////////////////////
 	
 	private void Start () {
 		myRigidBody = GetComponent<Rigidbody2D>();
 		myAnimator = GetComponent<Animator>();
 		myAudioSource = GetComponent<AudioSource>();
+		myStatsCounter = GetComponent<StatsCounter> ();
+
 		Input.simulateMouseWithTouches = true;
-		boostsRemaining = maxBoosts;
+//		boostsRemaining = maxBoosts;
 	}
 
 	private void Update() {
@@ -47,7 +51,7 @@ public class PlatformerController : MonoBehaviour {
 	private void FixedUpdate () {
 		var grounded = isGrounded();
 
-		if (grounded) boostsRemaining = maxBoosts;
+		if (grounded) myStatsCounter.replenishDefaultBoost();
 		
 		// touch controls (remove animator bool set for non-mobile testing)
 		myAnimator.SetBool("Running", grounded && moving);
@@ -184,9 +188,10 @@ public class PlatformerController : MonoBehaviour {
 		float jumpForce = defaultJumpForce;
 
 		if (!isGrounded) {
-			if (boostsRemaining <= 0)
+			if (myStatsCounter.canUseBoost ())
+				myStatsCounter.useBoost ();
+			else
 				return;
-			boostsRemaining--;
 		} else {
 			jumpForce = getFirstJumpForce (groundPlanet);
 		}
