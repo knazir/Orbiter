@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114720788269361308}
   - component: {fileID: 82536026867993976}
   - component: {fileID: 58286499935555214}
+  - component: {fileID: 114413270314176888}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -178,6 +179,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114413270314176888
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1408598565175292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013c5d090ce874d9c9118bec2cfa730b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultBoost: 1
 --- !u!114 &114720788269361308
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -189,7 +202,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b953772a33f70c64eaa96bf43cb1fa0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxBoosts: 1
   defaultJumpForce: 400
   moveSpeed: 5
   rotateSpeed: 5

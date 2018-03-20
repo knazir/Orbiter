@@ -18,7 +18,7 @@ public class StatsCounter : MonoBehaviour {
 //	}
 
 	void OnTriggerEnter2D(Collider2D col) {
-		if (col.gameObject.name == Constants.ROCKET) {
+		if (col.gameObject.tag == Constants.BOOSTER) {
 			extraBoosts++;
 			Destroy (col.gameObject);
 		}
