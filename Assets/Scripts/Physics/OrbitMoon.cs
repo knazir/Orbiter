@@ -20,20 +20,30 @@ public class OrbitMoon : MonoBehaviour {
 	private bool atPlanet = false;
 	private Vector3 originalStartPos;
 	private Vector3 originalEndPos;
+	private GameObject parentPlanet;
 
 	void Awake() {
-		originalStartPos = start.position;
-		originalEndPos = end.position;
+		
 
-//		GameObject planetTrigger = GameObject.Find("../../" + Constants.PLANET_TRIGGER);
+////			GameObject.Find("../../" + Constants.PLANET_TRIGGER);
 //		bool planetTriggerExists = (planetTrigger != null);
 //		if (!planetTriggerExists)
 //			throw new UnityException ("Missing planet trigger for" + gameObject.name);
 	}
 
 	void Start() {
+		originalStartPos = start.position;
+		originalEndPos = end.position;
+
+		GameObject parentPlanet = transform.parent.parent.gameObject;
+
+		if (parentPlanet.transform.childCount == 0 ||
+			parentPlanet.transform.GetChild (0).name != Constants.PLANET_TRIGGER) {
+			throw new UnityException ("PlanetTrigger collider should be first child of a planet with an orbitting moon.");
+		}
+
 		// Ignore collisions between orbitting planet and moon
-		Physics2D.IgnoreCollision(GetComponent<Collider2D>(), transform.parent.parent.gameObject.GetComponent<Collider2D>());
+		Physics2D.IgnoreCollision(GetComponent<Collider2D>(), parentPlanet.GetComponent<Collider2D>());
 	}
 
 	void FixedUpdate() {
