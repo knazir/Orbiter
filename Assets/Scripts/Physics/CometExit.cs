@@ -11,21 +11,17 @@ public class CometExit : MonoBehaviour {
 
 	private bool shouldFlyAway = false;
 
-	// Use this for initialization
-	void Start () {
-		exitTarget = new Vector2 (transform.position.x + EXIT_TARGET_DIST, transform.position.y);
+	private void Start () {
+		exitTarget = new Vector2(transform.position.x + EXIT_TARGET_DIST, transform.position.y);
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	private void Update () {
 		if (shouldFlyAway) {
-			transform.position = Vector2.MoveTowards (transform.position, exitTarget, FLY_SPEED * Time.deltaTime);
+			transform.position = Vector2.MoveTowards(transform.position, exitTarget, FLY_SPEED * Time.deltaTime);
 		}
 	}
 
-	void OnCollisionEnter2D(Collision2D col) {
-		if (col.gameObject.tag == Constants.PLAYER) {
-			shouldFlyAway = true;
-		}
+	private void OnCollisionEnter2D(Collision2D col) {
+		if (col.gameObject.CompareTag(Constants.PLAYER)) shouldFlyAway = true;
 	} 
 }
