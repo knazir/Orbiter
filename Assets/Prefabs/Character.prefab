@@ -24,9 +24,9 @@ GameObject:
   - component: {fileID: 50452652395964028}
   - component: {fileID: 114991588496102052}
   - component: {fileID: 114720788269361308}
+  - component: {fileID: 114413270314176888}
   - component: {fileID: 82536026867993976}
   - component: {fileID: 58286499935555214}
-  - component: {fileID: 114413270314176888}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -190,6 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013c5d090ce874d9c9118bec2cfa730b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boostBar: {fileID: 0}
   defaultBoost: 1
 --- !u!114 &114720788269361308
 MonoBehaviour:

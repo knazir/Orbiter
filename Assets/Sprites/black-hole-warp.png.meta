@@ -1,0 +1,1226 @@
+fileFormatVersion: 2
+guid: 80015ab1c1eb447679642066bd82685b
+timeCreated: 1521593225
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: black-hole-warp_0
+    21300002: black-hole-warp_1
+    21300004: black-hole-warp_2
+    21300006: black-hole-warp_3
+    21300008: black-hole-warp_4
+    21300010: black-hole-warp_5
+    21300012: black-hole-warp_6
+    21300014: black-hole-warp_7
+    21300016: black-hole-warp_8
+    21300018: black-hole-warp_9
+    21300020: black-hole-warp_10
+    21300022: black-hole-warp_11
+    21300024: black-hole-warp_12
+    21300026: black-hole-warp_13
+    21300028: black-hole-warp_14
+    21300030: black-hole-warp_15
+    21300032: black-hole-warp_16
+    21300034: black-hole-warp_17
+    21300036: black-hole-warp_18
+    21300038: black-hole-warp_19
+    21300040: black-hole-warp_20
+    21300042: black-hole-warp_21
+    21300044: black-hole-warp_22
+    21300046: black-hole-warp_23
+    21300048: black-hole-warp_24
+    21300050: black-hole-warp_25
+    21300052: black-hole-warp_26
+    21300054: black-hole-warp_27
+    21300056: black-hole-warp_28
+    21300058: black-hole-warp_29
+    21300060: black-hole-warp_30
+    21300062: black-hole-warp_31
+    21300064: black-hole-warp_32
+    21300066: black-hole-warp_33
+    21300068: black-hole-warp_34
+    21300070: black-hole-warp_35
+    21300072: black-hole-warp_36
+    21300074: black-hole-warp_37
+    21300076: black-hole-warp_38
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: black-hole-warp_0
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 2591
+        width: 471
+        height: 441
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_1
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 2605
+        width: 470
+        height: 411
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_2
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 2617
+        width: 425
+        height: 433
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_3
+      rect:
+        serializedVersion: 2
+        x: 1582
+        y: 2614
+        width: 450
+        height: 444
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_4
+      rect:
+        serializedVersion: 2
+        x: 2084
+        y: 2623
+        width: 477
+        height: 423
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_5
+      rect:
+        serializedVersion: 2
+        x: 2606
+        y: 2617
+        width: 389
+        height: 424
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_6
+      rect:
+        serializedVersion: 2
+        x: 1822
+        y: 2608
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_7
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 2590
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_8
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 2098
+        width: 430
+        height: 373
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_9
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 2086
+        width: 388
+        height: 415
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_10
+      rect:
+        serializedVersion: 2
+        x: 1078
+        y: 2115
+        width: 405
+        height: 391
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_11
+      rect:
+        serializedVersion: 2
+        x: 1583
+        y: 2119
+        width: 407
+        height: 392
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_12
+      rect:
+        serializedVersion: 2
+        x: 2074
+        y: 2092
+        width: 448
+        height: 417
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_13
+      rect:
+        serializedVersion: 2
+        x: 2621
+        y: 2086
+        width: 407
+        height: 417
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_14
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 1595
+        width: 354
+        height: 377
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_15
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 1642
+        width: 323
+        height: 317
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_16
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 1645
+        width: 288
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_17
+      rect:
+        serializedVersion: 2
+        x: 1663
+        y: 1660
+        width: 254
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_18
+      rect:
+        serializedVersion: 2
+        x: 2207
+        y: 1684
+        width: 208
+        height: 209
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_19
+      rect:
+        serializedVersion: 2
+        x: 2737
+        y: 1712
+        width: 165
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_20
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 1214
+        width: 134
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_21
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 1228
+        width: 100
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_22
+      rect:
+        serializedVersion: 2
+        x: 1247
+        y: 1243
+        width: 68
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_23
+      rect:
+        serializedVersion: 2
+        x: 1769
+        y: 1256
+        width: 47
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_24
+      rect:
+        serializedVersion: 2
+        x: 2287
+        y: 1261
+        width: 36
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_25
+      rect:
+        serializedVersion: 2
+        x: 2806
+        y: 1268
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_26
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 761
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_27
+      rect:
+        serializedVersion: 2
+        x: 764
+        y: 764
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_28
+      rect:
+        serializedVersion: 2
+        x: 1270
+        y: 755
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_29
+      rect:
+        serializedVersion: 2
+        x: 1760
+        y: 731
+        width: 66
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_30
+      rect:
+        serializedVersion: 2
+        x: 2254
+        y: 713
+        width: 100
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_31
+      rect:
+        serializedVersion: 2
+        x: 2746
+        y: 701
+        width: 133
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_32
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 176
+        width: 165
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_33
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 148
+        width: 208
+        height: 209
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_34
+      rect:
+        serializedVersion: 2
+        x: 1150
+        y: 124
+        width: 255
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_35
+      rect:
+        serializedVersion: 2
+        x: 1636
+        y: 106
+        width: 324
+        height: 317
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_36
+      rect:
+        serializedVersion: 2
+        x: 2129
+        y: 58
+        width: 352
+        height: 378
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_37
+      rect:
+        serializedVersion: 2
+        x: 2621
+        y: 34
+        width: 407
+        height: 420
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: black-hole-warp_38
+      rect:
+        serializedVersion: 2
+        x: 2806
+        y: 35
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline:
+    - - {x: 1494, y: -1269}
+      - {x: 1483.5, y: -1209}
+      - {x: 1456.5, y: -1159.5}
+      - {x: 1402.5, y: -1101}
+      - {x: 1347, y: -1080}
+      - {x: 1242, y: -1080}
+      - {x: 1156.5, y: -1122}
+      - {x: 1123.5, y: -1146}
+      - {x: 1083, y: -1219.5}
+      - {x: 1083, y: -1296}
+      - {x: 1089, y: -1336.5}
+      - {x: 1116, y: -1389}
+      - {x: 1129.5, y: -1456.5}
+      - {x: 1185, y: -1485}
+      - {x: 1222.5, y: -1504.5}
+      - {x: 1282.5, y: -1504.5}
+      - {x: 1311, y: -1494}
+      - {x: 1410, y: -1449}
+      - {x: 1494, y: -1360.5}
+    - - {x: 948, y: -1311}
+      - {x: 948, y: -1183.5}
+      - {x: 909, y: -1129.5}
+      - {x: 829.5, y: -1098}
+      - {x: 703.5, y: -1098}
+      - {x: 636, y: -1125}
+      - {x: 591, y: -1240.5}
+      - {x: 591, y: -1329}
+      - {x: 597, y: -1350}
+      - {x: 627, y: -1408.5}
+      - {x: 735, y: -1462.5}
+      - {x: 790.5, y: -1480.5}
+      - {x: 837, y: -1480.5}
+      - {x: 924, y: -1422}
+      - {x: 939, y: -1377}
+      - {x: 937.5, y: -1332}
+    - - {x: 402, y: -1335}
+      - {x: 406.5, y: -1336.5}
+      - {x: 426, y: -1351.5}
+      - {x: 426, y: -1180.5}
+      - {x: 297, y: -1110}
+      - {x: 162, y: -1110}
+      - {x: 123, y: -1126.5}
+      - {x: 97.5, y: -1200}
+      - {x: 97.5, y: -1389}
+      - {x: 181.5, y: -1432.5}
+      - {x: 331.5, y: -1432.5}
+      - {x: 411, y: -1362}
+      - {x: 399, y: -1336.5}
+      - {x: 403.5, y: -1335}
+    - - {x: -183, y: -1161}
+      - {x: -322.5, y: -1161}
+      - {x: -388.5, y: -1237.5}
+      - {x: -388.5, y: -1312.5}
+      - {x: -387, y: -1339.5}
+      - {x: -285, y: -1413}
+      - {x: -276, y: -1414.5}
+      - {x: -223.5, y: -1414.5}
+      - {x: -163.5, y: -1378.5}
+      - {x: -129, y: -1326}
+      - {x: -129, y: -1231.5}
+    - - {x: -867, y: -1335}
+      - {x: -814.5, y: -1389}
+      - {x: -811.5, y: -1390.5}
+      - {x: -721.5, y: -1390.5}
+      - {x: -654, y: -1326}
+      - {x: -654, y: -1252.5}
+      - {x: -697.5, y: -1176}
+      - {x: -801, y: -1176}
+      - {x: -867, y: -1201.5}
+    - - {x: -1332, y: -1191}
+      - {x: -1363.5, y: -1227}
+      - {x: -1363.5, y: -1326}
+      - {x: -1332, y: -1362}
+      - {x: -1248, y: -1362}
+      - {x: -1194, y: -1342.5}
+      - {x: -1194, y: -1227}
+      - {x: -1248, y: -1191}
+    - - {x: 1258.5, y: -697.5}
+      - {x: 1207.5, y: -750}
+      - {x: 1207.5, y: -792}
+      - {x: 1210.5, y: -807}
+      - {x: 1245, y: -837}
+      - {x: 1311, y: -837}
+      - {x: 1345.5, y: -810}
+      - {x: 1345.5, y: -738}
+      - {x: 1311, y: -697.5}
+    - - {x: 730.5, y: -720}
+      - {x: 715.5, y: -730.5}
+      - {x: 715.5, y: -795}
+      - {x: 727.5, y: -825}
+      - {x: 784.5, y: -825}
+      - {x: 820.5, y: -795}
+      - {x: 820.5, y: -733.5}
+      - {x: 790.5, y: -720}
+    - - {x: 240, y: -732}
+      - {x: 222, y: -751.5}
+      - {x: 222, y: -784.5}
+      - {x: 231, y: -799.5}
+      - {x: 255, y: -807}
+      - {x: 271.5, y: -807}
+      - {x: 292.5, y: -795}
+      - {x: 292.5, y: -735}
+      - {x: 283.5, y: -732}
+    - - {x: -249, y: -756}
+      - {x: -262.5, y: -756}
+      - {x: -268.5, y: -760.5}
+      - {x: -268.5, y: -774}
+      - {x: -265.5, y: -783}
+      - {x: -252, y: -783}
+      - {x: -241.5, y: -774}
+      - {x: -241.5, y: -765}
+    - - {x: -1281, y: -759}
+      - {x: -1288.5, y: -762}
+      - {x: -1288.5, y: -771}
+      - {x: -1282.5, y: -777}
+      - {x: -1278, y: -777}
+      - {x: -1272, y: -771}
+      - {x: -1272, y: -765}
+      - {x: -1275, y: -759}
+    - - {x: -769.5, y: -762}
+      - {x: -774, y: -766.5}
+      - {x: -774, y: -769.5}
+      - {x: -769.5, y: -774}
+      - {x: -766.5, y: -774}
+      - {x: -762, y: -769.5}
+      - {x: -762, y: -766.5}
+      - {x: -766.5, y: -762}
+    - - {x: -1314, y: -186}
+      - {x: -1353, y: -241.5}
+      - {x: -1353, y: -310.5}
+      - {x: -1312.5, y: -324}
+      - {x: -1243.5, y: -324}
+      - {x: -1213.5, y: -283.5}
+      - {x: -1213.5, y: -237}
+      - {x: -1233, y: -186}
+    - - {x: -787.5, y: -207}
+      - {x: -820.5, y: -234}
+      - {x: -820.5, y: -298.5}
+      - {x: -792, y: -310.5}
+      - {x: -726, y: -310.5}
+      - {x: -715.5, y: -298.5}
+      - {x: -715.5, y: -238.5}
+      - {x: -732, y: -207}
+    - - {x: -282, y: -222}
+      - {x: -291, y: -231}
+      - {x: -291, y: -285}
+      - {x: -265.5, y: -295.5}
+      - {x: -234, y: -295.5}
+      - {x: -219, y: -289.5}
+      - {x: -219, y: -225}
+      - {x: -237, y: -222}
+    - - {x: 244.5, y: -231}
+      - {x: 231, y: -238.5}
+      - {x: 231, y: -270}
+      - {x: 232.5, y: -274.5}
+      - {x: 243, y: -282}
+      - {x: 282, y: -282}
+      - {x: 282, y: -234}
+      - {x: 279, y: -231}
+    - - {x: 775.5, y: -235.5}
+      - {x: 762, y: -235.5}
+      - {x: 750, y: -241.5}
+      - {x: 748.5, y: -246}
+      - {x: 748.5, y: -264}
+      - {x: 759, y: -277.5}
+      - {x: 778.5, y: -277.5}
+      - {x: 789, y: -268.5}
+      - {x: 789, y: -244.5}
+      - {x: 787.5, y: -241.5}
+    - - {x: 1287, y: -243}
+      - {x: 1272, y: -243}
+      - {x: 1267.5, y: -246}
+      - {x: 1267.5, y: -262.5}
+      - {x: 1270.5, y: -270}
+      - {x: 1285.5, y: -270}
+      - {x: 1294.5, y: -264}
+      - {x: 1294.5, y: -253.5}
+      - {x: 1293, y: -244.5}
+    - - {x: -1132.5, y: 388.5}
+      - {x: -1147.5, y: 397.5}
+      - {x: -1228.5, y: 438}
+      - {x: -1338, y: 438}
+      - {x: -1369.5, y: 420}
+      - {x: -1393.5, y: 403.5}
+      - {x: -1423.5, y: 373.5}
+      - {x: -1456.5, y: 291}
+      - {x: -1456.5, y: 193.5}
+      - {x: -1405.5, y: 117}
+      - {x: -1353, y: 91.5}
+      - {x: -1260, y: 55.5}
+      - {x: -1218, y: 55.5}
+      - {x: -1134, y: 97.5}
+      - {x: -1098, y: 181.5}
+      - {x: -1098, y: 327}
+      - {x: -1102.5, y: 367.5}
+    - - {x: -687, y: 387}
+      - {x: -759, y: 426}
+      - {x: -787.5, y: 426}
+      - {x: -820.5, y: 417}
+      - {x: -889.5, y: 364.5}
+      - {x: -924, y: 321}
+      - {x: -927, y: 297}
+      - {x: -927, y: 207}
+      - {x: -870, y: 124.5}
+      - {x: -801, y: 103.5}
+      - {x: -711, y: 103.5}
+      - {x: -600, y: 199.5}
+      - {x: -600, y: 316.5}
+      - {x: -652.5, y: 366}
+    - - {x: -207, y: 414}
+      - {x: -301.5, y: 414}
+      - {x: -366, y: 381}
+      - {x: -393, y: 312}
+      - {x: -406.5, y: 252}
+      - {x: -406.5, y: 192}
+      - {x: -328.5, y: 106.5}
+      - {x: -189, y: 106.5}
+      - {x: -159, y: 145.5}
+      - {x: -114, y: 211.5}
+      - {x: -114, y: 312}
+    - - {x: 310.5, y: 375}
+      - {x: 210, y: 375}
+      - {x: 124.5, y: 306}
+      - {x: 124.5, y: 189}
+      - {x: 226.5, y: 121.5}
+      - {x: 294, y: 121.5}
+      - {x: 304.5, y: 126}
+      - {x: 384, y: 196.5}
+      - {x: 384, y: 280.5}
+      - {x: 360, y: 316.5}
+    - - {x: 694.5, y: 360}
+      - {x: 669, y: 313.5}
+      - {x: 669, y: 177}
+      - {x: 715.5, y: 145.5}
+      - {x: 814.5, y: 145.5}
+      - {x: 882, y: 235.5}
+      - {x: 882, y: 301.5}
+      - {x: 813, y: 360}
+    - - {x: 1231.5, y: 345}
+      - {x: 1198.5, y: 313.5}
+      - {x: 1198.5, y: 213}
+      - {x: 1213.5, y: 174}
+      - {x: 1357.5, y: 174}
+      - {x: 1368, y: 208.5}
+      - {x: 1368, y: 304.5}
+      - {x: 1320, y: 345}
+    - - {x: -570, y: 703.5}
+      - {x: -570, y: 807}
+      - {x: -576, y: 859.5}
+      - {x: -637.5, y: 922.5}
+      - {x: -718.5, y: 967.5}
+      - {x: -820.5, y: 967.5}
+      - {x: -876, y: 955.5}
+      - {x: -951, y: 831}
+      - {x: -931.5, y: 771}
+      - {x: -894, y: 700.5}
+      - {x: -885, y: 696}
+      - {x: -892.5, y: 699}
+      - {x: -904.5, y: 703.5}
+      - {x: -952.5, y: 741}
+      - {x: -964.5, y: 742.5}
+      - {x: -964.5, y: 694.5}
+      - {x: -957, y: 648}
+      - {x: -864, y: 600}
+      - {x: -895.5, y: 573}
+      - {x: -886.5, y: 555}
+      - {x: -858, y: 547.5}
+      - {x: -717, y: 547.5}
+      - {x: -622.5, y: 607.5}
+      - {x: -585, y: 657}
+    - - {x: 1492.5, y: 676.5}
+      - {x: 1494, y: 691.5}
+      - {x: 1494, y: 784.5}
+      - {x: 1480.5, y: 840}
+      - {x: 1453.5, y: 892.5}
+      - {x: 1407, y: 942}
+      - {x: 1342.5, y: 969}
+      - {x: 1270.5, y: 969}
+      - {x: 1251, y: 966}
+      - {x: 1177.5, y: 943.5}
+      - {x: 1119, y: 892.5}
+      - {x: 1096.5, y: 862.5}
+      - {x: 1083, y: 810}
+      - {x: 1083, y: 733.5}
+      - {x: 1131, y: 591}
+      - {x: 1158, y: 564}
+      - {x: 1219.5, y: 547.5}
+      - {x: 1305, y: 547.5}
+      - {x: 1320, y: 553.5}
+      - {x: 1384.5, y: 603}
+      - {x: 1408.5, y: 601.5}
+    - - {x: 988.5, y: 807}
+      - {x: 981, y: 843}
+      - {x: 955.5, y: 897}
+      - {x: 865.5, y: 963}
+      - {x: 834, y: 975}
+      - {x: 712.5, y: 975}
+      - {x: 658.5, y: 963}
+      - {x: 604.5, y: 903}
+      - {x: 553.5, y: 825}
+      - {x: 535.5, y: 729}
+      - {x: 535.5, y: 669}
+      - {x: 591, y: 631.5}
+      - {x: 609, y: 625.5}
+      - {x: 610.5, y: 621}
+      - {x: 609, y: 622.5}
+      - {x: 598.5, y: 625.5}
+      - {x: 591, y: 603}
+      - {x: 612, y: 580.5}
+      - {x: 687, y: 553.5}
+      - {x: 903, y: 553.5}
+      - {x: 940.5, y: 591}
+      - {x: 984, y: 681}
+      - {x: 988.5, y: 702}
+    - - {x: -1179, y: 937.5}
+      - {x: -1381.5, y: 937.5}
+      - {x: -1429.5, y: 906}
+      - {x: -1462.5, y: 868.5}
+      - {x: -1465.5, y: 787.5}
+      - {x: -1456.5, y: 762}
+      - {x: -1452, y: 754.5}
+      - {x: -1461, y: 769.5}
+      - {x: -1473, y: 795}
+      - {x: -1477.5, y: 792}
+      - {x: -1522.5, y: 811.5}
+      - {x: -1522.5, y: 741}
+      - {x: -1483.5, y: 636}
+      - {x: -1366.5, y: 559.5}
+      - {x: -1231.5, y: 559.5}
+      - {x: -1135.5, y: 618}
+      - {x: -1087.5, y: 679.5}
+      - {x: -1087.5, y: 865.5}
+    - - {x: -130.5, y: 672}
+      - {x: -130.5, y: 678}
+      - {x: -124.5, y: 688.5}
+      - {x: -127.5, y: 681}
+      - {x: -130.5, y: 672}
+      - {x: -130.5, y: 666}
+      - {x: -133.5, y: 661.5}
+      - {x: -151.5, y: 613.5}
+      - {x: -90, y: 580.5}
+      - {x: -49.5, y: 610.5}
+      - {x: -49.5, y: 925.5}
+      - {x: -145.5, y: 972}
+      - {x: -369, y: 972}
+      - {x: -460.5, y: 886.5}
+      - {x: -460.5, y: 679.5}
+      - {x: -301.5, y: 576}
+      - {x: -256.5, y: 576}
+      - {x: -225, y: 598.5}
+      - {x: -219, y: 603}
+      - {x: -225, y: 597}
+      - {x: -232.5, y: 588}
+      - {x: -228, y: 577.5}
+      - {x: -225, y: 576}
+      - {x: -216, y: 576}
+      - {x: -178.5, y: 598.5}
+      - {x: -145.5, y: 639}
+      - {x: -139.5, y: 651}
+    - - {x: 388.5, y: 858}
+      - {x: 381, y: 862.5}
+      - {x: 379.5, y: 862.5}
+      - {x: 373.5, y: 870}
+      - {x: 367.5, y: 873}
+      - {x: 373.5, y: 871.5}
+      - {x: 375, y: 867}
+      - {x: 394.5, y: 853.5}
+      - {x: 415.5, y: 841.5}
+      - {x: 420, y: 843}
+      - {x: 421.5, y: 850.5}
+      - {x: 447, y: 849}
+      - {x: 456, y: 850.5}
+      - {x: 456, y: 897}
+      - {x: 331.5, y: 978}
+      - {x: 132, y: 978}
+      - {x: 45, y: 903}
+      - {x: 45, y: 661.5}
+      - {x: 94.5, y: 580.5}
+      - {x: 321, y: 580.5}
+      - {x: 456, y: 648}
+      - {x: 456, y: 771}
+      - {x: 414, y: 834}
+    - - {x: -1396.5, y: 583.5}
+      - {x: -1392, y: 585}
+      - {x: -1392, y: 589.5}
+      - {x: -1396.5, y: 591}
+      - {x: -1399.5, y: 588}
+    - - {x: -237, y: 642}
+      - {x: -235.5, y: 637.5}
+      - {x: -231, y: 637.5}
+      - {x: -228, y: 640.5}
+      - {x: -229.5, y: 645}
+      - {x: -234, y: 645}
+    - - {x: -1050, y: 1224}
+      - {x: -1050, y: 1360.5}
+      - {x: -1096.5, y: 1432.5}
+      - {x: -1176, y: 1480.5}
+      - {x: -1255.5, y: 1498.5}
+      - {x: -1314, y: 1498.5}
+      - {x: -1347, y: 1492.5}
+      - {x: -1401, y: 1468.5}
+      - {x: -1452, y: 1426.5}
+      - {x: -1494, y: 1335}
+      - {x: -1507.5, y: 1263}
+      - {x: -1525.5, y: 1234.5}
+      - {x: -1525.5, y: 1203}
+      - {x: -1521, y: 1188}
+      - {x: -1500, y: 1161}
+      - {x: -1464, y: 1128}
+      - {x: -1452, y: 1086}
+      - {x: -1407, y: 1074}
+      - {x: -1360.5, y: 1063.5}
+      - {x: -1305, y: 1072.5}
+      - {x: -1293, y: 1051.5}
+      - {x: -1249.5, y: 1051.5}
+      - {x: -1237.5, y: 1054.5}
+      - {x: -1141.5, y: 1060.5}
+      - {x: -1096.5, y: 1119}
+      - {x: -1060.5, y: 1192.5}
+    - - {x: -522, y: 1300.5}
+      - {x: -522, y: 1350}
+      - {x: -532.5, y: 1387.5}
+      - {x: -580.5, y: 1431}
+      - {x: -625.5, y: 1453.5}
+      - {x: -699, y: 1482}
+      - {x: -778.5, y: 1482}
+      - {x: -838.5, y: 1467}
+      - {x: -898.5, y: 1419}
+      - {x: -933, y: 1390.5}
+      - {x: -978, y: 1333.5}
+      - {x: -997.5, y: 1285.5}
+      - {x: -997.5, y: 1246.5}
+      - {x: -994.5, y: 1239}
+      - {x: -973.5, y: 1206}
+      - {x: -970.5, y: 1159.5}
+      - {x: -949.5, y: 1119}
+      - {x: -868.5, y: 1095}
+      - {x: -811.5, y: 1096.5}
+      - {x: -796.5, y: 1072.5}
+      - {x: -787.5, y: 1066.5}
+      - {x: -718.5, y: 1066.5}
+      - {x: -609, y: 1074}
+      - {x: -561, y: 1155}
+      - {x: -526.5, y: 1225.5}
+      - {x: -526.5, y: 1291.5}
+    - - {x: 406.5, y: 1188}
+      - {x: 405, y: 1183.5}
+      - {x: 409.5, y: 1162.5}
+      - {x: 411, y: 1158}
+      - {x: 427.5, y: 1159.5}
+      - {x: 435, y: 1177.5}
+      - {x: 435, y: 1179}
+      - {x: 490.5, y: 1179}
+      - {x: 498, y: 1189.5}
+      - {x: 498, y: 1299}
+      - {x: 477, y: 1414.5}
+      - {x: 420, y: 1486.5}
+      - {x: 337.5, y: 1524}
+      - {x: 225, y: 1524}
+      - {x: 162, y: 1509}
+      - {x: 52.5, y: 1446}
+      - {x: 43.5, y: 1408.5}
+      - {x: 43.5, y: 1197}
+      - {x: 202.5, y: 1069.5}
+      - {x: 336, y: 1069.5}
+      - {x: 399, y: 1152}
+      - {x: 402, y: 1182}
+      - {x: 408, y: 1189.5}
+    - - {x: -81, y: 1137}
+      - {x: -81, y: 1144.5}
+      - {x: -81, y: 1140}
+      - {x: -79.5, y: 1135.5}
+      - {x: -64.5, y: 1120.5}
+      - {x: -19.5, y: 1156.5}
+      - {x: -6, y: 1233}
+      - {x: -6, y: 1350}
+      - {x: -46.5, y: 1449}
+      - {x: -108, y: 1501.5}
+      - {x: -162, y: 1516.5}
+      - {x: -268.5, y: 1516.5}
+      - {x: -337.5, y: 1503}
+      - {x: -412.5, y: 1447.5}
+      - {x: -436.5, y: 1369.5}
+      - {x: -436.5, y: 1282.5}
+      - {x: -432, y: 1263}
+      - {x: -436.5, y: 1219.5}
+      - {x: -436.5, y: 1165.5}
+      - {x: -423, y: 1135.5}
+      - {x: -357, y: 1116}
+      - {x: -352.5, y: 1086}
+      - {x: -324, y: 1078.5}
+      - {x: -265.5, y: 1078.5}
+      - {x: -186, y: 1107}
+      - {x: -156, y: 1090.5}
+      - {x: -94.5, y: 1116}
+    - - {x: 1411.5, y: 1384.5}
+      - {x: 1398, y: 1428}
+      - {x: 1339.5, y: 1480.5}
+      - {x: 1263, y: 1465.5}
+      - {x: 1227, y: 1444.5}
+      - {x: 1218, y: 1435.5}
+      - {x: 1236, y: 1456.5}
+      - {x: 1257, y: 1465.5}
+      - {x: 1240.5, y: 1507.5}
+      - {x: 1191, y: 1507.5}
+      - {x: 1140, y: 1461}
+      - {x: 1096.5, y: 1405.5}
+      - {x: 1069.5, y: 1335}
+      - {x: 1068, y: 1332}
+      - {x: 1068, y: 1230}
+      - {x: 1095, y: 1161}
+      - {x: 1144.5, y: 1111.5}
+      - {x: 1213.5, y: 1078.5}
+      - {x: 1321.5, y: 1078.5}
+      - {x: 1387.5, y: 1092}
+      - {x: 1428, y: 1134}
+      - {x: 1461, y: 1201.5}
+      - {x: 1461, y: 1311}
+    - - {x: 940.5, y: 1197}
+      - {x: 940.5, y: 1212}
+      - {x: 940.5, y: 1195.5}
+      - {x: 939, y: 1191}
+      - {x: 939, y: 1186.5}
+      - {x: 936, y: 1173}
+      - {x: 937.5, y: 1161}
+      - {x: 940.5, y: 1158}
+      - {x: 952.5, y: 1158}
+      - {x: 969, y: 1185}
+      - {x: 990, y: 1294.5}
+      - {x: 990, y: 1296}
+      - {x: 990, y: 1294.5}
+      - {x: 1002, y: 1281}
+      - {x: 1027.5, y: 1258.5}
+      - {x: 1027.5, y: 1369.5}
+      - {x: 889.5, y: 1512}
+      - {x: 654, y: 1512}
+      - {x: 583.5, y: 1485}
+      - {x: 546, y: 1363.5}
+      - {x: 546, y: 1167}
+      - {x: 616.5, y: 1084.5}
+      - {x: 925.5, y: 1084.5}
+      - {x: 928.5, y: 1140}
+      - {x: 939, y: 1188}
+      - {x: 939, y: 1195.5}
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

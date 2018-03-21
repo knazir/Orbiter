@@ -255,6 +255,14 @@ public class PlatformerController : MonoBehaviour {
 		return raycastHit.collider != null;
 	}
 
+	public bool isOnPlanet(GameObject targetPlanet){
+		GameObject curPlanet = null;
+		if (!isGrounded (ref curPlanet))
+			return false;
+		else
+			return curPlanet.name == targetPlanet.name;
+	}
+
 	//////////////////// Setter Methods ////////////////////////
 
 	public void SetMoving(bool value) {
