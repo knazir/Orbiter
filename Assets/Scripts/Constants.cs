@@ -9,5 +9,6 @@ public static class Constants {
 	public const string PLAYER = "Player";
 	public const string PLANET_TRIGGER = "PlanetTrigger";
 	public const string BOOSTER = "Booster";
+	public const string BOOSTBAR = "BoostBar";
 	public const float GRAVITY = 6.67408f;
 }

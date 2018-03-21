@@ -6907,6 +6907,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1881692829}
   - component: {fileID: 1881692830}
+  - component: {fileID: 1881692831}
   m_Layer: 0
   m_Name: BlackHoleTrigger
   m_TagString: Untagged
@@ -6940,6 +6941,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blackHole: {fileID: 386915922}
   targetPlanet: {fileID: 1784992726}
+  collapseSpeed: 3
+  blackHoleMinDistance: 2
+--- !u!58 &1881692831
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1881692828}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 5
 --- !u!1001 &1911314923
 Prefab:
   m_ObjectHideFlags: 0
@@ -7958,11 +7976,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4055701336457286, guid: b61051cac6db14d1ba6cf86e1f53f296, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 295.13
+      value: 131.8
       objectReference: {fileID: 0}
     - target: {fileID: 4055701336457286, guid: b61051cac6db14d1ba6cf86e1f53f296, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -29.51
+      value: -26
       objectReference: {fileID: 0}
     - target: {fileID: 4055701336457286, guid: b61051cac6db14d1ba6cf86e1f53f296, type: 2}
       propertyPath: m_LocalPosition.z

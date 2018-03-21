@@ -7,7 +7,8 @@ public class TriggerBlackHole : MonoBehaviour {
 	public GameObject blackHole;
 	public GameObject targetPlanet;
 
-	[SerializeField] private const float COLLAPSE_SPEED = 3.0f;
+	[SerializeField] private float collapseSpeed = 3.0f;
+	[SerializeField] private float blackHoleMinDistance = 2.0f;
 
 	private List<GameObject> planets;
 	private GameObject sun;
@@ -15,12 +16,12 @@ public class TriggerBlackHole : MonoBehaviour {
 	private bool blackHoleIsActive = false;
 
 	private void Awake() {
-		blackHole.SetActive (blackHoleIsActive);
+		blackHole.SetActive(blackHoleIsActive);
 
-		sun = GameObject.Find (Constants.SUN);
-		planets = new List<GameObject>(GameObject.FindGameObjectsWithTag (Constants.CELESTIAL_BODY));
+		sun = GameObject.Find(Constants.SUN);
+		planets = new List<GameObject>(GameObject.FindGameObjectsWithTag(Constants.CELESTIAL_BODY));
 
-		var character = GameObject.FindGameObjectWithTag (Constants.PLAYER);
+		var character = GameObject.FindGameObjectWithTag(Constants.PLAYER);
 		characterController = character.GetComponent<PlatformerController> ();
 	}
 		
@@ -38,28 +39,25 @@ public class TriggerBlackHole : MonoBehaviour {
 
 	private void activateBlackHole() {
 		blackHoleIsActive = true;
-		blackHole.SetActive (true);
-		sun.SetActive (false);
+		blackHole.SetActive(true);
 	}
 
 	private void collapsePlanets() {
-		if (!blackHoleIsActive)
-			return;
-
-		var step = COLLAPSE_SPEED * Time.deltaTime;
-		var blackHolePos = transform.position;
-
+		if (!blackHoleIsActive) return;
+		var step = collapseSpeed * Time.deltaTime;
 		for (var i = planets.Count - 1; i >= 0; i--) {
-			var planet = planets [i];
+			var planet = planets[i];
+			if (planet == null) continue;
+			planet.transform.position = Vector2.MoveTowards (planet.transform.position, transform.position, step);
+		}
+	}
 
-			planet.transform.position = Vector2.MoveTowards (planet.transform.position, blackHolePos, step);
-
-			// Check if planet has been absorbed by black hole
-			if (planet.transform.position != blackHolePos) continue;
-			
-			// Remove planet from list and scene
-			planets.Remove(planet);
-			Destroy (planet);
+	private void OnTriggerEnter2D(Collider2D other) {
+		if (other.CompareTag(Constants.PLAYER)) {
+			FindObjectOfType<LevelManager>().ReloadScene();
+		} else {
+			if (planets.IndexOf(other.gameObject) != -1) planets.Remove(other.gameObject);
+			Destroy(other.gameObject);
 		}
 	}
 }
