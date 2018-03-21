@@ -18,8 +18,13 @@ public class OrbitMoon : MonoBehaviour {
 	private const float frontPlanetZPos = -1f;
 
 	private bool atPlanet = false;
+	private Vector3 originalStartPos;
+	private Vector3 originalEndPos;
 
 	void Awake() {
+		originalStartPos = start.position;
+		originalEndPos = end.position;
+
 //		GameObject planetTrigger = GameObject.Find("../../" + Constants.PLANET_TRIGGER);
 //		bool planetTriggerExists = (planetTrigger != null);
 //		if (!planetTriggerExists)
@@ -32,22 +37,21 @@ public class OrbitMoon : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		Vector2 nextPosXY = Vector2.Lerp (start.localPosition, end.localPosition, Mathf.PingPong(Time.time*orbitSpeed, 1.0f));
+		Vector2 nextPosXY = Vector2.Lerp (originalStartPos, originalEndPos, Mathf.PingPong(Time.time*orbitSpeed, 1.0f));
 
 		bool shouldBeBehindPlanet = 
-			atPlanet && isMovingToEnd (transform.localPosition, nextPosXY, start.localPosition, end.localPosition);
+			atPlanet && isMovingToEnd (transform.position, nextPosXY, originalStartPos, originalEndPos);
 		
 		if (shouldBeBehindPlanet) {
-			transform.localPosition = new Vector3 (nextPosXY.x, nextPosXY.y, behindPlanetZPos);
+			transform.position = new Vector3 (nextPosXY.x, nextPosXY.y, behindPlanetZPos);
 		} else if (atPlanet && !shouldBeBehindPlanet) {
-			transform.localPosition = new Vector3 (nextPosXY.x, nextPosXY.y, frontPlanetZPos);
+			transform.position = new Vector3 (nextPosXY.x, nextPosXY.y, frontPlanetZPos);
 		} else {
-			transform.localPosition = new Vector3 (nextPosXY.x, nextPosXY.y, besidePlanetZPos);
+			transform.position = new Vector3 (nextPosXY.x, nextPosXY.y, besidePlanetZPos);
 		}
 	}
 
 	void OnTriggerEnter2D(Collider2D col) {
-		GameObject ancestorObject = transform.parent.parent.gameObject;
 		if (col.gameObject.name == Constants.PLANET_TRIGGER) {
 			// Move moon behind parent planet
 			atPlanet = true;
