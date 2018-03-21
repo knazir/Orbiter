@@ -18,36 +18,50 @@ public class OrbitMoon : MonoBehaviour {
 	private const float frontPlanetZPos = -1f;
 
 	private bool atPlanet = false;
+	private Vector3 originalStartPos;
+	private Vector3 originalEndPos;
+	private GameObject parentPlanet;
 
 	void Awake() {
-//		GameObject planetTrigger = GameObject.Find("../../" + Constants.PLANET_TRIGGER);
+		
+
+////			GameObject.Find("../../" + Constants.PLANET_TRIGGER);
 //		bool planetTriggerExists = (planetTrigger != null);
 //		if (!planetTriggerExists)
 //			throw new UnityException ("Missing planet trigger for" + gameObject.name);
 	}
 
 	void Start() {
+		originalStartPos = start.position;
+		originalEndPos = end.position;
+
+		GameObject parentPlanet = transform.parent.parent.gameObject;
+
+		if (parentPlanet.transform.childCount == 0 ||
+			parentPlanet.transform.GetChild (0).name != Constants.PLANET_TRIGGER) {
+			throw new UnityException ("PlanetTrigger collider should be first child of a planet with an orbitting moon.");
+		}
+
 		// Ignore collisions between orbitting planet and moon
-		Physics2D.IgnoreCollision(GetComponent<Collider2D>(), transform.parent.parent.gameObject.GetComponent<Collider2D>());
+		Physics2D.IgnoreCollision(GetComponent<Collider2D>(), parentPlanet.GetComponent<Collider2D>());
 	}
 
 	void FixedUpdate() {
-		Vector2 nextPosXY = Vector2.Lerp (start.localPosition, end.localPosition, Mathf.PingPong(Time.time*orbitSpeed, 1.0f));
+		Vector2 nextPosXY = Vector2.Lerp (originalStartPos, originalEndPos, Mathf.PingPong(Time.time*orbitSpeed, 1.0f));
 
 		bool shouldBeBehindPlanet = 
-			atPlanet && isMovingToEnd (transform.localPosition, nextPosXY, start.localPosition, end.localPosition);
+			atPlanet && isMovingToEnd (transform.position, nextPosXY, originalStartPos, originalEndPos);
 		
 		if (shouldBeBehindPlanet) {
-			transform.localPosition = new Vector3 (nextPosXY.x, nextPosXY.y, behindPlanetZPos);
+			transform.position = new Vector3 (nextPosXY.x, nextPosXY.y, behindPlanetZPos);
 		} else if (atPlanet && !shouldBeBehindPlanet) {
-			transform.localPosition = new Vector3 (nextPosXY.x, nextPosXY.y, frontPlanetZPos);
+			transform.position = new Vector3 (nextPosXY.x, nextPosXY.y, frontPlanetZPos);
 		} else {
-			transform.localPosition = new Vector3 (nextPosXY.x, nextPosXY.y, besidePlanetZPos);
+			transform.position = new Vector3 (nextPosXY.x, nextPosXY.y, besidePlanetZPos);
 		}
 	}
 
 	void OnTriggerEnter2D(Collider2D col) {
-		GameObject ancestorObject = transform.parent.parent.gameObject;
 		if (col.gameObject.name == Constants.PLANET_TRIGGER) {
 			// Move moon behind parent planet
 			atPlanet = true;
