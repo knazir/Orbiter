@@ -7,6 +7,8 @@ TagManager:
   - CelestialBody
   - MovingCelestialBody
   - Booster
+  - PowerUps
+  - BoostBar
   layers:
   - Default
   - TransparentFX

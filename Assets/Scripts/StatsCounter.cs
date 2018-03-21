@@ -13,13 +13,13 @@ public class StatsCounter : MonoBehaviour {
 	private int extraBoosts = 0; // Extra boosts are collected
 
 	private void Awake() {
-		boostBar = GameObject.Find("/UI/Boost Bar/Boost Bar").GetComponent<SimpleHealthBar>();
+		boostBar = GameObject.FindGameObjectWithTag("BoostBar").GetComponent<SimpleHealthBar>();
 		updateBoostBar();
 	}
 
 	private void OnTriggerEnter2D(Collider2D col) {
 		if (!col.gameObject.CompareTag(Constants.BOOSTER)) return;
-		Destroy (col.gameObject);
+		Destroy(col.gameObject);
 		extraBoosts++;
 		updateBoostBar();
 	}
