@@ -14,18 +14,17 @@ public class TriggerBlackHole : MonoBehaviour {
 	private PlatformerController characterController;
 	private bool blackHoleIsActive = false;
 
-	void Awake() {
+	private void Awake() {
 		blackHole.SetActive (blackHoleIsActive);
 
 		sun = GameObject.Find (Constants.SUN);
 		planets = new List<GameObject>(GameObject.FindGameObjectsWithTag (Constants.CELESTIAL_BODY));
 
-		GameObject character = GameObject.FindGameObjectWithTag (Constants.PLAYER);
+		var character = GameObject.FindGameObjectWithTag (Constants.PLAYER);
 		characterController = character.GetComponent<PlatformerController> ();
 	}
 		
-	void Update () {
-
+	private void Update () {
 		// Trigger the black hole when character reaches right planet
 		if (!blackHoleIsActive && characterController.isOnPlanet (targetPlanet)) {
 			activateBlackHole ();
@@ -36,6 +35,7 @@ public class TriggerBlackHole : MonoBehaviour {
 	}
 
 	///////// Helper Methods ///////////
+
 	private void activateBlackHole() {
 		blackHoleIsActive = true;
 		blackHole.SetActive (true);
@@ -46,20 +46,20 @@ public class TriggerBlackHole : MonoBehaviour {
 		if (!blackHoleIsActive)
 			return;
 
-		float step = COLLAPSE_SPEED * Time.deltaTime;
-		Vector3 blackHolePos = transform.position;
+		var step = COLLAPSE_SPEED * Time.deltaTime;
+		var blackHolePos = transform.position;
 
-		for (int i = planets.Count - 1; i >= 0; i--) {
-			GameObject planet = planets [i];
+		for (var i = planets.Count - 1; i >= 0; i--) {
+			var planet = planets [i];
 
 			planet.transform.position = Vector2.MoveTowards (planet.transform.position, blackHolePos, step);
 
-			// Planet has been absorbed by black hole
-			if (planet.transform.position == blackHolePos) {
-				// Remove planet from list and scene
-				planets.Remove(planet);
-				Destroy (planet);
-			}
+			// Check if planet has been absorbed by black hole
+			if (planet.transform.position != blackHolePos) continue;
+			
+			// Remove planet from list and scene
+			planets.Remove(planet);
+			Destroy (planet);
 		}
 	}
 }

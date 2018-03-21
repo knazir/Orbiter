@@ -48,7 +48,6 @@ public class Fader : MonoBehaviour {
 	    } else if (alpha <= 0 && isFadeIn) {
 			Destroy(gameObject);
 	    }
-
     }
 
     private void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode) {
