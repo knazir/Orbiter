@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 19.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+<g id="heart">
+	<g>
+		<circle style="fill:#0D70FF;" cx="50" cy="50" r="50"/>
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="38.5901" y1="1.8211" x2="61.2412" y2="97.4666">
+			<stop  offset="0" style="stop-color:#091A57"/>
+			<stop  offset="1" style="stop-color:#091A32"/>
+		</linearGradient>
+		<circle style="fill:url(#SVGID_1_);" cx="50" cy="50" r="49"/>
+		<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="28.0486" y1="12.3921" x2="76.4706" y2="96.0494">
+			<stop  offset="0" style="stop-color:#091A57;stop-opacity:0.1"/>
+			<stop  offset="1" style="stop-color:#020919"/>
+		</linearGradient>
+		<path style="fill:url(#SVGID_2_);" d="M3.349,65.004C9.687,84.725,28.173,99,50,99c27.062,0,49-21.938,49-49
+			c0-6.928-1.439-13.519-4.034-19.492C92.318,120.159,24.29,7.111,3.349,65.004z"/>
+		<path style="opacity:0.1;fill:#5271AF;" d="M50.779,24.948c11.289,3.234,20.039-17.289,7.205-23.29C55.385,1.232,52.72,1,50,1
+			C22.938,1,1,22.938,1,50c0,1.814,0.106,3.603,0.298,5.365C4.568,39.659,8.122,12.727,50.779,24.948z"/>
+	</g>
+	<g>
+		<path d="M75.663,26.44c-7.087-7.253-18.574-7.253-25.663,0c-7.089-7.253-18.576-7.253-25.662,0
+			c-7.089,7.261-7.089,19.023,0,26.284L50,79l25.663-26.276C82.75,45.463,82.75,33.701,75.663,26.44z"/>
+		<path style="fill:#00C4FF;" d="M73.762,28.185c-6.562-6.716-17.198-6.716-23.762,0c-6.564-6.716-17.2-6.716-23.761,0
+			c-6.564,6.723-6.564,17.613,0,24.337L50,76.852l23.762-24.33C80.324,45.799,80.324,34.908,73.762,28.185z"/>
+		<path style="fill:#99ECFF;" d="M61.616,32.529c-2.219,0.037-4.063,1.157-4.294,1.305c-1.885,1.266,0.311,4.489,2.186,3.279
+			c0.211-0.311,1.312-0.711,2.108-0.711c2.138,0,3.873,1.732,3.873,3.873c0,0.624-0.186,1.173-0.444,1.713
+			c-0.534,1.841,2.266,2.947,3.473,1.736c0.338-0.388,0.843-2.201,0.843-3.449C69.361,35.997,65.893,32.529,61.616,32.529z"/>
+	</g>
+	<g>
+		
+			<ellipse transform="matrix(0.892 0.4521 -0.4521 0.892 13.3965 -28.4936)" style="opacity:0.3;fill:#3887F9;" cx="66.318" cy="13.784" rx="7.25" ry="2.875"/>
+		<ellipse style="opacity:0.3;fill:#3887F9;" cx="78.006" cy="21.972" rx="2.188" ry="1.938"/>
+	</g>
+</g>
+<g id="Layer_1">
+</g>
+</svg>

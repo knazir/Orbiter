@@ -28,7 +28,7 @@ public class TriggerBlackHole : MonoBehaviour {
 	private void Update () {
 		// Trigger the black hole when character reaches right planet
 		if (!blackHoleIsActive && characterController.isOnPlanet (targetPlanet)) {
-			activateBlackHole ();
+			activateBlackHole();
 		}
 
 		// Move planets if black hole activated
@@ -40,6 +40,7 @@ public class TriggerBlackHole : MonoBehaviour {
 	private void activateBlackHole() {
 		blackHoleIsActive = true;
 		blackHole.SetActive(true);
+		sun.SetActive(false);
 	}
 
 	private void collapsePlanets() {
@@ -48,11 +49,12 @@ public class TriggerBlackHole : MonoBehaviour {
 		for (var i = planets.Count - 1; i >= 0; i--) {
 			var planet = planets[i];
 			if (planet == null) continue;
-			planet.transform.position = Vector2.MoveTowards (planet.transform.position, transform.position, step);
+			planet.transform.position = Vector2.MoveTowards(planet.transform.position, transform.position, step);
 		}
 	}
 
 	private void OnTriggerEnter2D(Collider2D other) {
+		if (sun.activeSelf) return;
 		if (other.CompareTag(Constants.PLAYER)) {
 			FindObjectOfType<LevelManager>().ReloadScene();
 		} else {

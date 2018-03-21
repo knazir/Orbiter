@@ -11,7 +11,6 @@ public class PlatformerController : MonoBehaviour {
 	private const float MOVE_EPSILON = 0.001f;
 	private const float FIRST_JUMP_MULT = 1.2f;
 
-//	[SerializeField] private int maxBoosts = 1;
 	[SerializeField] private float defaultJumpForce = 500.0f;
 	[SerializeField] private float moveSpeed = 5.0f;
 	[SerializeField] private float rotateSpeed = 5.0f;
@@ -26,11 +25,10 @@ public class PlatformerController : MonoBehaviour {
 	private StatsCounter myStatsCounter;
 
 	private bool facingRight = true;
-//	private float curJumpForce = 0.0f;
-//	private float curTotalTouchDelta = 0.0f;
+
 	private bool moving = false;
 	private bool movingRight = true;
-//	private int boostsRemaining;
+	
 	//////////////////// Unity Event Handlers ////////////////////
 	
 	private void Start () {
@@ -40,7 +38,6 @@ public class PlatformerController : MonoBehaviour {
 		myStatsCounter = GetComponent<StatsCounter> ();
 
 		Input.simulateMouseWithTouches = true;
-//		boostsRemaining = maxBoosts;
 	}
 
 	private void Update() {
@@ -74,24 +71,19 @@ public class PlatformerController : MonoBehaviour {
 		if (getIncomingGround() != null) reorientToLandOn();
 	}
 
-	private void OnCollisionEnter2D(Collision2D col) {
+	// TODO: Check if this messes anything up (always setting collider to parent)
+	private void OnCollisionEnter2D(Collision2D other) {
 		// Ride smoothly on moving bodies
-		if (col.gameObject.tag == Constants.MOVING_BODY) {
-			Transform movingBody = col.transform;
-			transform.SetParent (movingBody);
-		} else {
-			// If we collide with any other planet, the ride is over
-			endRideOnMovingBody();
-		}
+		if (shouldFollowBody(other.gameObject)) transform.SetParent(other.transform);
 	}
 
-	private void OnColllisionExit2D(Collision2D col) {
-		if (col.gameObject.tag == Constants.MOVING_BODY) {
-			endRideOnMovingBody ();
-		}
+	private void OnCollisionExit2D(Collision2D other) {
+		if (shouldFollowBody(other.gameObject)) endRideOnMovingBody ();
 	}
 
-
+	private bool shouldFollowBody(GameObject body) {
+		return body.CompareTag(Constants.MOVING_BODY) || body.CompareTag(Constants.CELESTIAL_BODY);
+	}
 	
 	//////////////////// Touch Input ////////////////////////
 	
@@ -154,7 +146,7 @@ public class PlatformerController : MonoBehaviour {
 	//////////////////// Helper Methods ////////////////////////
 
 	private void endRideOnMovingBody() {
-		transform.SetParent (null);
+		transform.SetParent(null);
 	}
 	
 	private bool getInputJump() {
@@ -185,15 +177,16 @@ public class PlatformerController : MonoBehaviour {
 	}
 
 	private void applyJump(bool isGrounded, GameObject groundPlanet) {
-		float jumpForce = defaultJumpForce;
+		var jumpForce = defaultJumpForce;
 
 		if (!isGrounded) {
-			if (myStatsCounter.canUseBoost ())
-				myStatsCounter.useBoost ();
-			else
+			if (myStatsCounter.canUseBoost()) {
+				myStatsCounter.useBoost();
+			} else {
 				return;
+			}
 		} else {
-			jumpForce = getFirstJumpForce (groundPlanet);
+			jumpForce = getFirstJumpForce(groundPlanet);
 		}
 
 		myAudioSource.PlayOneShot(jumpAudio);
@@ -205,24 +198,23 @@ public class PlatformerController : MonoBehaviour {
 
 	private float getFirstJumpForce(GameObject groundPlanet) {
 		// returns a jump force relative to the planet mass and radius one is on
-		float planetMass = getGroundPlanetMass(groundPlanet);
-		float planetRadius = getGroundPlanetRadius (groundPlanet);
-		float playerMass = GetComponent<Rigidbody2D> ().mass;
+		var planetMass = getGroundPlanetMass(groundPlanet);
+		var planetRadius = getGroundPlanetRadius(groundPlanet);
+		var playerMass = GetComponent<Rigidbody2D>().mass;
 
-		float escapeVelocity = (float)Math.Pow ((2 * (planetMass/planetRadius)), 0.5f);
+		var escapeVelocity = (float)Math.Pow(2 * (planetMass / planetRadius), 0.5f);
 
 		// We need a small multiplier b/c this is a one time force while gravity is a force applied every frame
-		return  ((escapeVelocity/Time.deltaTime) * playerMass * FIRST_JUMP_MULT);
+		return  (escapeVelocity/Time.deltaTime) * playerMass * FIRST_JUMP_MULT;
 	}
 
 	private float getGroundPlanetMass(GameObject groundPlanet){
-		return groundPlanet.GetComponent<Rigidbody2D> ().mass;
+		return groundPlanet.GetComponent<Rigidbody2D>().mass;
 	}
 
 	private float getGroundPlanetRadius(GameObject groundPlanet){
 		var planetRigidBody = groundPlanet.GetComponent<Rigidbody2D>();
 		var direction = GetComponent<Rigidbody2D>().position - planetRigidBody.position;
-
 		return direction.magnitude;
 	}
 
@@ -257,10 +249,8 @@ public class PlatformerController : MonoBehaviour {
 
 	public bool isOnPlanet(GameObject targetPlanet){
 		GameObject curPlanet = null;
-		if (!isGrounded (ref curPlanet))
-			return false;
-		else
-			return curPlanet.name == targetPlanet.name;
+		if (!isGrounded(ref curPlanet)) return false;
+		return curPlanet.name == targetPlanet.name;
 	}
 
 	//////////////////// Setter Methods ////////////////////////

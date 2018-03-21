@@ -43,6 +43,6 @@ public class StatsCounter : MonoBehaviour {
 	}
 
 	private void updateBoostBar(){
-		boostBar.UpdateBar (defaultBoost + extraBoosts, MAX_BOOSTS);
+		boostBar.UpdateBar(defaultBoost + extraBoosts, MAX_BOOSTS);
 	}
 }
