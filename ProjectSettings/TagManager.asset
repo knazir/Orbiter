@@ -9,6 +9,9 @@ TagManager:
   - Booster
   - PowerUps
   - BoostBar
+  - ScreenDarkener
+  - CompletedPanel
+  - PausePanel
   layers:
   - Default
   - TransparentFX
