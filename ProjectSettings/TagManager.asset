@@ -9,6 +9,7 @@ TagManager:
   - Booster
   - PowerUps
   - BoostBar
+  - Star
   layers:
   - Default
   - TransparentFX
