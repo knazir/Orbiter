@@ -16,20 +16,19 @@ public class StatsCounter : MonoBehaviour {
 	private int starScore = 0;
 
 	private void Awake() {
-		boostBar = GameObject.FindGameObjectWithTag(Constants.BOOST_BAR).GetComponent<SimpleHealthBar>();
 		starScoreText = GameObject.FindGameObjectWithTag(Constants.STAR_SCORE).GetComponent<Text>();
 		boostCountText = GameObject.FindGameObjectWithTag(Constants.BOOST_COUNT).GetComponent<Text>();
 	}
 
 	private void OnTriggerEnter2D(Collider2D col) {
 		if (col.gameObject.CompareTag (Constants.BOOSTER)) {
-			Destroy (col.gameObject);
+			Destroy(col.gameObject);
 			extraBoosts++;
-			updateBoostCount ();
+			updateBoostCount();
 		} else if (col.gameObject.CompareTag (Constants.STAR)) { 
 			Destroy (col.gameObject);
 			starScore++;
-			updateStarScoreText ();
+			updateStarScoreText();
 		}
 	}
 	
@@ -37,13 +36,14 @@ public class StatsCounter : MonoBehaviour {
 	
 	public void replenishDefaultBoost() {
 		defaultBoost = 1;
+		updateBoostCount();
 	}
 
 	public void useBoost() {
 		if (!canUseBoost()) return;
 		if (defaultBoost != 0) defaultBoost--;
 		else extraBoosts--;
-		updateBoostCount ();
+		updateBoostCount();
 	}
 		
 	public bool canUseBoost() {
@@ -51,7 +51,7 @@ public class StatsCounter : MonoBehaviour {
 	}
 
 	private void updateBoostCount(){
-		boostCountText.text = "" + extraBoosts;
+		boostCountText.text = "" + (defaultBoost + extraBoosts);
 	}
 
 	private void updateStarScoreText(){

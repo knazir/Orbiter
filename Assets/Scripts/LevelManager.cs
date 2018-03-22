@@ -37,11 +37,18 @@ public class LevelManager : MonoBehaviour {
     }
     
     public void ReloadScene() {
+        unpauseTime();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void GoToMenu() {
+        unpauseTime();
         SceneManager.LoadScene(Constants.MENU_SCENE);
+    }
+
+    public void LoadNextLevel() {
+        unpauseTime();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public bool IsPaused() {
