@@ -200,7 +200,7 @@ public class PlatformerController : MonoBehaviour {
 			jumpForce = getFirstJumpForce(groundPlanet);
 		}
 
-		myAudioSource.PlayOneShot(jumpAudio);
+		playSound(jumpAudio);
 		myAnimator.SetTrigger("Jump");
 		var jumpDirection = transform.up * jumpForce;
 		myRigidBody.AddForce(jumpDirection);
@@ -267,6 +267,10 @@ public class PlatformerController : MonoBehaviour {
 		return raycastHit.collider != null;
 	}
 
+	private void playSound(AudioClip clip) {
+		myAudioSource.PlayOneShot(clip);
+	}
+
 	public bool isOnPlanet(GameObject targetPlanet){
 		GameObject curPlanet = null;
 		if (!isGrounded(ref curPlanet)) return false;
@@ -283,6 +287,7 @@ public class PlatformerController : MonoBehaviour {
 
 	public void HopOffComet() {
 		myAnimator.SetTrigger("Jump");
+		playSound(jumpAudio);
 		var jumpDirection = transform.up * cometJumpForce;
 		myRigidBody.AddForce(jumpDirection);
 		myRigidBody.angularVelocity = 0.0f;
