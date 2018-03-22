@@ -13,6 +13,7 @@ public static class Constants {
 	public const string PLANET_TRIGGER = "PlanetTrigger";
 	public const string BOOSTER = "Booster";
 	public const string BOOST_BAR = "BoostBar";
+	public const string BOOST_COUNT = "BoostCount";
 	public const string PAUSE_PANEL = "PausePanel";
 	public const string COMPLETED_PANEL = "CompletedPanel";
 	public const string STAR_SCORE = "StarScore";
