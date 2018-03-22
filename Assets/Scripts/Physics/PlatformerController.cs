@@ -10,6 +10,8 @@ public class PlatformerController : MonoBehaviour {
 	private const KeyCode JUMP = KeyCode.Space;
 	private const float MOVE_EPSILON = 0.001f;
 	private const float TARGET_EPSILON = 0.75f;
+	private const float FLOATING_DEAD_CHECK_DELAY = 2.0f;
+	private const float DEAD_VELOCITY_MAGNITUDE = 1.4f;
 	private const float FIRST_JUMP_MULT = 80.0f;
 
 	[SerializeField] private float defaultJumpForce = 500.0f;
@@ -25,6 +27,7 @@ public class PlatformerController : MonoBehaviour {
 	private Animator myAnimator;
 	private AudioSource myAudioSource;
 	private StatsCounter myStatsCounter;
+	private LevelManager levelManager;
 	private Transform target = null;
 
 	private bool facingRight = true;
@@ -32,6 +35,7 @@ public class PlatformerController : MonoBehaviour {
 	private bool moving = false;
 	private bool movingRight = true;
 	private bool movementEnabled = false;
+	private bool waitingToCheckFloatDeath = false;
 	
 	//////////////////// Unity Event Handlers ////////////////////
 	
@@ -40,6 +44,7 @@ public class PlatformerController : MonoBehaviour {
 		myAnimator = GetComponent<Animator>();
 		myAudioSource = GetComponent<AudioSource>();
 		myStatsCounter = GetComponent<StatsCounter> ();
+		levelManager = FindObjectOfType<LevelManager>();
 		Input.simulateMouseWithTouches = true;
 	}
 
@@ -51,7 +56,13 @@ public class PlatformerController : MonoBehaviour {
 	private void FixedUpdate () {
 		var grounded = isGrounded();
 
-		if (grounded) myStatsCounter.replenishDefaultBoost();
+		if (grounded) {
+			myStatsCounter.replenishDefaultBoost();
+		} else if (myRigidBody.velocity.magnitude < DEAD_VELOCITY_MAGNITUDE && !waitingToCheckFloatDeath) {
+			// TODO: Figure out if this would ever be useful (as opposed to tighter boundaries)
+			// waitingToCheckFloatDeath = true;
+			// Invoke("checkFloatingDeath", FLOATING_DEAD_CHECK_DELAY);
+		}
 		
 		// touch controls (remove animator bool set for non-mobile testing)
 		myAnimator.SetBool("Running", grounded && moving);
@@ -82,7 +93,11 @@ public class PlatformerController : MonoBehaviour {
 		if (getIncomingGround() != null) reorientToLandOn();
 	}
 
-	// TODO: Check if this messes anything up (always setting collider to parent)
+	private void checkFloatingDeath() {
+		if (isGrounded() || myRigidBody.velocity.magnitude >= DEAD_VELOCITY_MAGNITUDE) return;
+		levelManager.ReloadScene();
+	}
+
 	private void OnCollisionEnter2D(Collision2D other) {
 		// Ride smoothly on moving bodies
 		if (shouldFollowBody(other.gameObject)) transform.SetParent(other.transform);

@@ -479,7 +479,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Orbit
+  m_Text: Orbiter
 --- !u!222 &855581093
 CanvasRenderer:
   m_ObjectHideFlags: 0
