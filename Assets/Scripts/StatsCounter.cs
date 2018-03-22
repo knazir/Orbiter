@@ -8,16 +8,11 @@ public class StatsCounter : MonoBehaviour {
 	private const int MAX_BOOSTS = 10;
 	
 	[SerializeField] private int defaultBoost = 1;
-	
-	private Text starScoreText;
-	private Text boostCountText;
+	[SerializeField] private Text starScoreText;
+	[SerializeField] private Text boostCountText;
+
 	private int extraBoosts = 0; // Extra boosts are collected
 	private int starScore = 0;
-
-	private void Awake() {
-		starScoreText = GameObject.FindGameObjectWithTag(Constants.STAR_SCORE).GetComponent<Text>();
-		boostCountText = GameObject.FindGameObjectWithTag(Constants.BOOST_COUNT).GetComponent<Text>();
-	}
 
 	private void OnTriggerEnter2D(Collider2D col) {
 		if (col.gameObject.CompareTag(Constants.BOOSTER)) {

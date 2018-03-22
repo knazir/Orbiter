@@ -12,6 +12,7 @@ public class PlatformerController : MonoBehaviour {
 	private const float FIRST_JUMP_MULT = 1.2f;
 
 	[SerializeField] private float defaultJumpForce = 500.0f;
+	[SerializeField] private float cometJumpForce = 3250.0f;
 	[SerializeField] private float moveSpeed = 5.0f;
 	[SerializeField] private float rotateSpeed = 5.0f;
 	[SerializeField] private LayerMask groundLayer;
@@ -28,6 +29,7 @@ public class PlatformerController : MonoBehaviour {
 
 	private bool moving = false;
 	private bool movingRight = true;
+	private bool movementEnabled = false;
 	
 	//////////////////// Unity Event Handlers ////////////////////
 	
@@ -36,13 +38,12 @@ public class PlatformerController : MonoBehaviour {
 		myAnimator = GetComponent<Animator>();
 		myAudioSource = GetComponent<AudioSource>();
 		myStatsCounter = GetComponent<StatsCounter> ();
-
 		Input.simulateMouseWithTouches = true;
 	}
 
 	private void Update() {
 		GameObject groundPlanet = null;
-		if (getInputJump()) applyJump(isGrounded(ref groundPlanet), groundPlanet);
+		if (getInputJump() && movementEnabled) applyJump(isGrounded(ref groundPlanet), groundPlanet);
 	}
 	
 	private void FixedUpdate () {
@@ -52,7 +53,7 @@ public class PlatformerController : MonoBehaviour {
 		
 		// touch controls (remove animator bool set for non-mobile testing)
 		myAnimator.SetBool("Running", grounded && moving);
-		if (moving) {
+		if (moving && movementEnabled) {
 			if (grounded) {
 				if (movingRight) moveRight();
 				else moveLeft();
@@ -63,9 +64,11 @@ public class PlatformerController : MonoBehaviour {
 		}
 		
 		// keyboard controls
-		if (grounded) handleKeyboardPlanetMovement();
-		else handleKeyboardSpaceMovement();
-	
+		if (movementEnabled) {
+			if (grounded) handleKeyboardPlanetMovement();
+			else handleKeyboardSpaceMovement();
+		}
+
 		myRigidBody.angularVelocity = 0.0f;
 		
 		if (getIncomingGround() != null) reorientToLandOn();
@@ -237,7 +240,6 @@ public class PlatformerController : MonoBehaviour {
 	}
 		
 	private bool isGrounded(ref GameObject groundPlanet) {
-
 		var direction = -transform.up;
 		var raycastHit = Physics2D.Raycast(transform.position, direction, groundRayLength, groundLayer);
 
@@ -251,6 +253,21 @@ public class PlatformerController : MonoBehaviour {
 		GameObject curPlanet = null;
 		if (!isGrounded(ref curPlanet)) return false;
 		return curPlanet.name == targetPlanet.name;
+	}
+
+	public void EnableMovement() {
+		movementEnabled = true;
+	}
+
+	public void DisableMovement() {
+		movementEnabled = false;
+	}
+
+	public void HopOffComet() {
+		myAnimator.SetTrigger("Jump");
+		var jumpDirection = transform.up * cometJumpForce;
+		myRigidBody.AddForce(jumpDirection);
+		myRigidBody.angularVelocity = 0.0f;
 	}
 
 	//////////////////// Setter Methods ////////////////////////

@@ -16,6 +16,15 @@ TagManager:
   - ScreenDarkener
   - BoostCount
   - CometParticleSystem
+  - Enemy
+  - ExplosionFX
+  - Bullet
+  - ground
+  - Obstacle
+  - HealthBar
+  - BombPickup
+  - Exploder2D
+  - ExploderObject
   layers:
   - Default
   - TransparentFX
