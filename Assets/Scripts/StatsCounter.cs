@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class StatsCounter : MonoBehaviour {
 
-	public SimpleHealthBar boostBar;
 	public Text starScoreText;
+	public Text boostCountText;
 	
 	private const int MAX_BOOSTS = 10;
 	
@@ -18,14 +18,14 @@ public class StatsCounter : MonoBehaviour {
 	private void Awake() {
 		boostBar = GameObject.FindGameObjectWithTag(Constants.BOOST_BAR).GetComponent<SimpleHealthBar>();
 		starScoreText = GameObject.FindGameObjectWithTag(Constants.STAR_SCORE).GetComponent<Text>();
-		updateBoostBar();
+		boostCountText = GameObject.FindGameObjectWithTag(Constants.BOOST_COUNT).GetComponent<Text>();
 	}
 
 	private void OnTriggerEnter2D(Collider2D col) {
 		if (col.gameObject.CompareTag (Constants.BOOSTER)) {
 			Destroy (col.gameObject);
 			extraBoosts++;
-			updateBoostBar ();
+			updateBoostCount ();
 		} else if (col.gameObject.CompareTag (Constants.STAR)) { 
 			Destroy (col.gameObject);
 			starScore++;
@@ -37,22 +37,21 @@ public class StatsCounter : MonoBehaviour {
 	
 	public void replenishDefaultBoost() {
 		defaultBoost = 1;
-		updateBoostBar();
 	}
 
 	public void useBoost() {
 		if (!canUseBoost()) return;
 		if (defaultBoost != 0) defaultBoost--;
 		else extraBoosts--;
-		updateBoostBar();
+		updateBoostCount ();
 	}
 		
 	public bool canUseBoost() {
 		return defaultBoost > 0 || extraBoosts > 0;
 	}
 
-	private void updateBoostBar(){
-		boostBar.UpdateBar(defaultBoost + extraBoosts, MAX_BOOSTS);
+	private void updateBoostCount(){
+		boostCountText.text = "" + extraBoosts;
 	}
 
 	private void updateStarScoreText(){
