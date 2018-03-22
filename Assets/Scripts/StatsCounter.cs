@@ -7,15 +7,20 @@ public class StatsCounter : MonoBehaviour {
 	
 	private const int MAX_BOOSTS = 10;
 	
-	[SerializeField] private int defaultBoost = 1;
+	[SerializeField] private int defaultBoosts = 1;
 	[SerializeField] private Text starScoreText;
 	[SerializeField] private Text boostCountText;
 	[SerializeField] private AudioClip starPickup;
 	[SerializeField] private AudioClip boostPickup;
 
 	private AudioSource audioSource;
-	private int extraBoosts = 0; // Extra boosts are collected
 	private int starScore = 0;
+	private int currentBoosts;
+
+	private void Awake() {
+		currentBoosts = defaultBoosts;
+		updateBoostCount();
+	}
 
 	private void Start() {
 		audioSource = GetComponent<AudioSource>();
@@ -25,7 +30,7 @@ public class StatsCounter : MonoBehaviour {
 		if (col.gameObject.CompareTag(Constants.BOOSTER)) {
 			playSound(boostPickup);
 			Destroy(col.gameObject);
-			extraBoosts++;
+			currentBoosts++;
 			updateBoostCount();
 		} else if (col.gameObject.CompareTag(Constants.STAR)) { 
 			playSound(starPickup);
@@ -42,23 +47,22 @@ public class StatsCounter : MonoBehaviour {
 	//////////// Helper Methods /////////////
 	
 	public void replenishDefaultBoost() {
-		defaultBoost = 1;
+		currentBoosts = defaultBoosts;
 		updateBoostCount();
 	}
 
 	public void useBoost() {
 		if (!canUseBoost()) return;
-		if (defaultBoost != 0) defaultBoost--;
-		else extraBoosts--;
+		currentBoosts--;
 		updateBoostCount();
 	}
 		
 	public bool canUseBoost() {
-		return defaultBoost > 0 || extraBoosts > 0;
+		return currentBoosts > 0;
 	}
 
 	private void updateBoostCount(){
-		boostCountText.text = "" + (defaultBoost + extraBoosts);
+		boostCountText.text = "" + currentBoosts;
 	}
 
 	private void updateStarScoreText(){

@@ -390,6 +390,21 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 82078942201256356, guid: 906d71218efa52941bedfc503619348d,
+        type: 2}
+      propertyPath: m_Volume
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114376673087494230, guid: 906d71218efa52941bedfc503619348d,
+        type: 2}
+      propertyPath: defaultBoost
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114376673087494230, guid: 906d71218efa52941bedfc503619348d,
+        type: 2}
+      propertyPath: defaultBoosts
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 906d71218efa52941bedfc503619348d, type: 2}
   m_IsPrefabParent: 0
