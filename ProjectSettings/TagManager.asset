@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Star
+  - StarScore
   layers:
   - Default
   - TransparentFX
