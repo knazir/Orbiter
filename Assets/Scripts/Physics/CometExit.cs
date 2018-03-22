@@ -9,9 +9,11 @@ public class CometExit : MonoBehaviour {
 	private const float FLY_SPEED = 20.0f;
 	private const float EXIT_TARGET_DIST = 1000.0f;
 
+	private LevelManager levelManager;
 	private bool shouldFlyAway = false;
 
 	private void Start () {
+		levelManager = FindObjectOfType<LevelManager>();
 		exitTarget = new Vector2(transform.position.x + EXIT_TARGET_DIST, transform.position.y);
 	}
 	
@@ -22,6 +24,8 @@ public class CometExit : MonoBehaviour {
 	}
 
 	private void OnCollisionEnter2D(Collision2D col) {
-		if (col.gameObject.CompareTag(Constants.PLAYER)) shouldFlyAway = true;
+		if (!col.gameObject.CompareTag(Constants.PLAYER)) return;
+		shouldFlyAway = true;
+		levelManager.FinishLevel();
 	} 
 }

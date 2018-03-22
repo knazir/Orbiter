@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
+    
+    private const float END_LEVEL_DELAY = 2.0f;
 
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject completedPanel;
@@ -31,9 +33,7 @@ public class LevelManager : MonoBehaviour {
     }
 
     public void FinishLevel() {
-        isPaused = true;
-        pausePanel.SetActive(false);
-        completedPanel.SetActive(true);
+        Invoke("completeLevel", END_LEVEL_DELAY);
     }
     
     public void ReloadScene() {
@@ -46,6 +46,13 @@ public class LevelManager : MonoBehaviour {
 
     public bool IsPaused() {
         return isPaused;
+    }
+
+    private void completeLevel() {
+        isPaused = true;
+        pausePanel.SetActive(false);
+        completedPanel.SetActive(true);
+        pauseTime();
     }
 
     private void pauseTime() {
