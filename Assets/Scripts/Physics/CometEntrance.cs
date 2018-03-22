@@ -20,7 +20,8 @@ public class CometEntrance : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter2D(Collider2D other) {
-		if (hopped) return;
+		if (other.CompareTag(Constants.PLAYER) || hopped) return;
+		Debug.Log(other);
 		// Get player off comet
 		hopped = true;
 		platformerController.HopOffComet();
