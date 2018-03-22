@@ -10,20 +10,33 @@ public class StatsCounter : MonoBehaviour {
 	[SerializeField] private int defaultBoost = 1;
 	[SerializeField] private Text starScoreText;
 	[SerializeField] private Text boostCountText;
+	[SerializeField] private AudioClip starPickup;
+	[SerializeField] private AudioClip boostPickup;
 
+	private AudioSource audioSource;
 	private int extraBoosts = 0; // Extra boosts are collected
 	private int starScore = 0;
 
+	private void Start() {
+		audioSource = GetComponent<AudioSource>();
+	}
+
 	private void OnTriggerEnter2D(Collider2D col) {
 		if (col.gameObject.CompareTag(Constants.BOOSTER)) {
+			playSound(boostPickup);
 			Destroy(col.gameObject);
 			extraBoosts++;
 			updateBoostCount();
 		} else if (col.gameObject.CompareTag(Constants.STAR)) { 
-			Destroy (col.gameObject);
+			playSound(starPickup);
+			Destroy(col.gameObject);
 			starScore++;
 			updateStarScoreText();
 		}
+	}
+
+	private void playSound(AudioClip sound) {
+		audioSource.PlayOneShot(sound);
 	}
 	
 	//////////// Helper Methods /////////////

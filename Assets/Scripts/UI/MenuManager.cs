@@ -5,6 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour {
 	public void LoadDemo() {
-		SceneManager.LoadScene("Demo");
+		SceneManager.LoadScene("Tutorial_1");
 	}
 }

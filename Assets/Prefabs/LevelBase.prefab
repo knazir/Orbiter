@@ -3288,7 +3288,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.35
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3368,7 +3368,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 6a9080feaae474a66b822f2d8a10cec7, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -4390,6 +4390,8 @@ MonoBehaviour:
   defaultBoost: 1
   starScoreText: {fileID: 114710350004913844}
   boostCountText: {fileID: 114894178462315122}
+  starPickup: {fileID: 8300000, guid: 3d1e9d94d51284a6098bad3c4179cdfa, type: 3}
+  boostPickup: {fileID: 8300000, guid: e4749bc7709984f00be6d85143840316, type: 3}
 --- !u!114 &114384944799543124
 MonoBehaviour:
   m_ObjectHideFlags: 1
