@@ -48,7 +48,7 @@ public class StatsCounter : MonoBehaviour {
 	//////////// Helper Methods /////////////
 	
 	public void replenishDefaultBoost() {
-		currentBoosts = defaultBoosts;
+		if (currentBoosts < defaultBoosts) currentBoosts += defaultBoosts;
 		updateBoostCount();
 	}
 
