@@ -10,7 +10,9 @@ public class LevelManager : MonoBehaviour {
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject completedPanel;
     [SerializeField] private GameObject screenDarkener;
-    
+    [SerializeField] private LevelCompleteManager levelCompleteManager;
+    [SerializeField] private GameObject fader;
+
     private bool isPaused = false;
     private float originalTimeScale;
 
@@ -33,6 +35,9 @@ public class LevelManager : MonoBehaviour {
     }
 
     public void FinishLevel() {
+        Debug.Log("Start");
+        FadeOut();
+        Debug.Log("Here");
         Invoke("completeLevel", END_LEVEL_DELAY);
     }
     
@@ -51,6 +56,21 @@ public class LevelManager : MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void FadeOut() {
+        fader.SetActive(true);
+        StartCoroutine(FadeToBlack());
+    }
+
+    private IEnumerator FadeToBlack() {
+        var canvasGroup = fader.GetComponent<CanvasGroup>();
+        while (canvasGroup.alpha < 1) {
+            canvasGroup.alpha += Time.deltaTime / 2.0f;
+            yield return null;
+        }
+        canvasGroup.interactable = false;
+        yield return null;
+    }
+
     public bool IsPaused() {
         return isPaused;
     }
@@ -59,6 +79,7 @@ public class LevelManager : MonoBehaviour {
         isPaused = true;
         pausePanel.SetActive(false);
         completedPanel.SetActive(true);
+        levelCompleteManager.ShowStars();
         pauseTime();
     }
 

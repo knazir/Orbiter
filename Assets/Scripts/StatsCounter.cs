@@ -4,14 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class StatsCounter : MonoBehaviour {
-
-	public Text starScoreText;
-	public Text boostCountText;
 	
 	private const int MAX_BOOSTS = 10;
 	
 	[SerializeField] private int defaultBoost = 1;
 	
+	private Text starScoreText;
+	private Text boostCountText;
 	private int extraBoosts = 0; // Extra boosts are collected
 	private int starScore = 0;
 
@@ -21,11 +20,11 @@ public class StatsCounter : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter2D(Collider2D col) {
-		if (col.gameObject.CompareTag (Constants.BOOSTER)) {
+		if (col.gameObject.CompareTag(Constants.BOOSTER)) {
 			Destroy(col.gameObject);
 			extraBoosts++;
 			updateBoostCount();
-		} else if (col.gameObject.CompareTag (Constants.STAR)) { 
+		} else if (col.gameObject.CompareTag(Constants.STAR)) { 
 			Destroy (col.gameObject);
 			starScore++;
 			updateStarScoreText();
@@ -56,5 +55,9 @@ public class StatsCounter : MonoBehaviour {
 
 	private void updateStarScoreText(){
 		starScoreText.text = "" + starScore;
+	}
+
+	public int getStarScore() {
+		return starScore;
 	}
 }
