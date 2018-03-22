@@ -25,6 +25,7 @@ TagManager:
   - BombPickup
   - Exploder2D
   - ExploderObject
+  - Sun
   layers:
   - Default
   - TransparentFX

@@ -1,8 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Exploder2D;
 using UnityEngine;
 
 public class TriggerBlackHole : MonoBehaviour {
+
+	private const float BLACK_HOLE_DELAY = 1.5f;
+	private const float REMOVE_SUN_DELAY = 1.0f;
 
 	public GameObject blackHole;
 	public GameObject targetPlanet;
@@ -13,21 +18,27 @@ public class TriggerBlackHole : MonoBehaviour {
 	private List<GameObject> planets;
 	private GameObject sun;
 	private PlatformerController characterController;
-	private bool blackHoleIsActive = false;
+	private Exploder2DObject exploder;
+	
+	private static bool sunExploded = false;
+	private static bool blackHoleIsActive = false;
 
 	private void Awake() {
+		sunExploded = false;
+		blackHoleIsActive = false;
 		blackHole.SetActive(blackHoleIsActive);
-
-		sun = GameObject.Find(Constants.SUN);
+		sun = GameObject.FindGameObjectWithTag(Constants.SUN);
 		planets = new List<GameObject>(GameObject.FindGameObjectsWithTag(Constants.CELESTIAL_BODY));
+		characterController = FindObjectOfType<PlatformerController>();
+	}
 
-		var character = GameObject.FindGameObjectWithTag(Constants.PLAYER);
-		characterController = character.GetComponent<PlatformerController> ();
+	private void Start() {
+		exploder = Exploder2D.Utils.Exploder2DSingleton.Exploder2DInstance;
 	}
 		
-	private void Update () {
+	private void Update() {
 		// Trigger the black hole when character reaches right planet
-		if (!blackHoleIsActive && characterController.isOnPlanet (targetPlanet)) {
+		if (!blackHoleIsActive && characterController.isOnPlanet(targetPlanet)) {
 			activateBlackHole();
 		}
 
@@ -38,9 +49,7 @@ public class TriggerBlackHole : MonoBehaviour {
 	///////// Helper Methods ///////////
 
 	private void activateBlackHole() {
-		blackHoleIsActive = true;
-		blackHole.SetActive(true);
-		sun.SetActive(false);
+		Invoke("startBlackHole", BLACK_HOLE_DELAY);
 	}
 
 	private void collapsePlanets() {
@@ -54,12 +63,25 @@ public class TriggerBlackHole : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter2D(Collider2D other) {
-		if (sun.activeSelf) return;
 		if (other.CompareTag(Constants.PLAYER)) {
 			FindObjectOfType<LevelManager>().ReloadScene();
-		} else {
+		} else if (!other.CompareTag(Constants.SUN)) {
 			if (planets.IndexOf(other.gameObject) != -1) planets.Remove(other.gameObject);
 			Destroy(other.gameObject);
 		}
+	}
+
+	private void startBlackHole() {
+		if (sunExploded) return;
+		sun.tag = Constants.EXPLODER_2D;
+		Exploder2DUtils.SetActive(sun, true);
+		exploder.transform.position = Exploder2DUtils.GetCentroid(sun);
+		exploder.Radius = 100.0f;
+		exploder.Force = 32.0f;
+		exploder.TargetFragments = 420;
+		sunExploded = true;
+		exploder.Explode();
+		blackHoleIsActive = true;
+		blackHole.SetActive(true);
 	}
 }

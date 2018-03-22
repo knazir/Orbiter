@@ -47,6 +47,7 @@ public class StatsCounter : MonoBehaviour {
 	
 	//////////// Helper Methods /////////////
 	
+	// TODO: Fix bug where you jump, get a booost, land, and don't go up one boost
 	public void replenishDefaultBoost() {
 		if (currentBoosts < defaultBoosts) currentBoosts += defaultBoosts;
 		updateBoostCount();
