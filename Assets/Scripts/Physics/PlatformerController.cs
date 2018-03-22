@@ -209,23 +209,13 @@ public class PlatformerController : MonoBehaviour {
 
 	private float getFirstJumpForce(GameObject groundPlanet) {
 		// returns a jump force relative to the planet mass and radius one is on
-		Debug.Log("Ground planet: " + groundPlanet);
 		var planetMass = getGroundPlanetMass(groundPlanet);
 		var planetRadius = getGroundPlanetRadius(groundPlanet);
 		var playerMass = GetComponent<Rigidbody2D>().mass;
 
 		var escapeVelocity = (float)Math.Pow(2 * (planetMass / planetRadius), 0.5f);
 
-		// We need a small multiplier b/c this is a one time force while gravity is a force applied every frame
-		
-//		Debug.Log("planetMass: " + planetMass);
-//		Debug.Log("planetRadius: " + planetRadius);
-//		Debug.Log("playerMass: " + playerMass);
-//		Debug.Log("Escape velocity: " + escapeVelocity);
-//		Debug.Log("Jump force: " + ((escapeVelocity / Time.deltaTime) * playerMass * FIRST_JUMP_MULT));
-//		Debug.Log("Time.deltaTime: " + Time.deltaTime);
-//		Debug.Log("Escape velocity ratio: " + escapeVelocity / Time.deltaTime);
-		
+		// We need a small multiplier b/c this is a one time force while gravity is a force applied every frame		
 		return  escapeVelocity * playerMass * FIRST_JUMP_MULT;
 	}
 
@@ -254,16 +244,13 @@ public class PlatformerController : MonoBehaviour {
 
 	private bool isGrounded() {
 		GameObject groundPlanet = null;
-		return isGrounded (ref groundPlanet);
+		return isGrounded(ref groundPlanet);
 	}
 		
 	private bool isGrounded(ref GameObject groundPlanet) {
 		var direction = -transform.up;
 		var raycastHit = Physics2D.Raycast(transform.position, direction, groundRayLength, groundLayer);
-
-		if (raycastHit.collider)
-			groundPlanet = raycastHit.collider.gameObject;
-		
+		if (raycastHit.collider) groundPlanet = raycastHit.collider.gameObject;
 		return raycastHit.collider != null;
 	}
 

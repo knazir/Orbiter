@@ -15,7 +15,7 @@ public class CometEntrance : MonoBehaviour {
 
 	private void Start() {
 		platformerController = FindObjectOfType<PlatformerController>();
-		GetComponent<Rigidbody2D>().velocity = Vector2.right * initialVelocity;
+		GetComponent<Rigidbody2D>().velocity = transform.right * initialVelocity;
 		exploder = Exploder2D.Utils.Exploder2DSingleton.Exploder2DInstance;
 	}
 
