@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class CometEntrance : MonoBehaviour {
 
+	[SerializeField] private float initialVelocity;
+
+	private void Start() {
+		GetComponent<Rigidbody2D>().velocity = Vector2.right * initialVelocity;
+	}
+
 	private void OnCollisionEnter2D(Collision2D col) {
-		if (col.gameObject.CompareTag(Constants.CELESTIAL_BODY)) deactivateComet ();
+		if (col.gameObject.CompareTag(Constants.CELESTIAL_BODY)) deactivateComet();
 	}
 
 	//////////////// Helper Methods ///////////////
 
 	private void deactivateComet() {
-		// Get off children
+		// Remove non-particle-system children
 		foreach (Transform child in transform) {
-			child.parent = null;
+			if (child.GetComponent<ParticleSystem>() == null) child.parent = null;
 		}
 		Destroy(gameObject);
 	}

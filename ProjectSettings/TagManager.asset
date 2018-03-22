@@ -15,6 +15,7 @@ TagManager:
   - PausePanel
   - ScreenDarkener
   - BoostCount
+  - CometParticleSystem
   layers:
   - Default
   - TransparentFX
@@ -57,6 +58,9 @@ TagManager:
     locked: 0
   - name: Midground
     uniqueID: 2863661499
+    locked: 0
+  - name: Effects
+    uniqueID: 2871055373
     locked: 0
   - name: Foreground
     uniqueID: 343072207

@@ -48,7 +48,7 @@ public class LevelManager : MonoBehaviour {
 
     public void GoToMenu() {
         unpauseTime();
-        SceneManager.LoadScene(Constants.MENU_SCENE);
+        SceneManager.LoadScene(Constants.SCENE_MENU);
     }
 
     public void LoadNextLevel() {

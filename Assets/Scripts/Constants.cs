@@ -17,9 +17,14 @@ public static class Constants {
 	public const string PAUSE_PANEL = "PausePanel";
 	public const string COMPLETED_PANEL = "CompletedPanel";
 	public const string STAR_SCORE = "StarScore";
+	public const string COMET_PARTICLE_SYSTEM = "CometParticleSystem";
 	
 	// scenes
-	public const string MENU_SCENE = "Menu";
+	public const string SCENE_MENU = "Menu";
+	
+	// sorting layers
+	public const string SORTING_LAYER_EFFECTS = "Effects";
+	public const string SORTING_LAYER_FOREGROUND = "Foreground";
 	
 	// config
 	public const float GRAVITY = 6.67408f;
