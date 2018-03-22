@@ -16,8 +16,8 @@ public class StatsCounter : MonoBehaviour {
 	private int starScore = 0;
 
 	private void Awake() {
-		boostBar = GameObject.FindGameObjectWithTag("BoostBar").GetComponent<SimpleHealthBar>();
-		starScoreText = GameObject.FindGameObjectWithTag("StarScore").GetComponent<Text>();
+		boostBar = GameObject.FindGameObjectWithTag(Constants.BOOST_BAR).GetComponent<SimpleHealthBar>();
+		starScoreText = GameObject.FindGameObjectWithTag(Constants.STAR_SCORE).GetComponent<Text>();
 		updateBoostBar();
 	}
 

@@ -15,6 +15,7 @@ public static class Constants {
 	public const string BOOST_BAR = "BoostBar";
 	public const string PAUSE_PANEL = "PausePanel";
 	public const string COMPLETED_PANEL = "CompletedPanel";
+	public const string STAR_SCORE = "StarScore";
 	
 	// scenes
 	public const string MENU_SCENE = "Menu";
