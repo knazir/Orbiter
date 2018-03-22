@@ -4,14 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - CelestialBody
-  - MovingCelestialBody
-  - Booster
-  - PowerUps
-  - BoostBar
-  - ScreenDarkener
-  - CompletedPanel
-  - PausePanel
+  - Star
   layers:
   - Default
   - TransparentFX
@@ -21,8 +14,8 @@ TagManager:
   - UI
   - 
   - 
-  - CelestialBodies
-  - Background
+  - 
+  - 
   - 
   - 
   - 
@@ -48,13 +41,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Background
-    uniqueID: 3093830267
-    locked: 0
-  - name: Midground
-    uniqueID: 2863661499
-    locked: 0
-  - name: Foreground
-    uniqueID: 343072207
     locked: 0

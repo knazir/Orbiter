@@ -11,6 +11,7 @@ public class StatsCounter : MonoBehaviour {
 	[SerializeField] private int defaultBoost = 1;
 	
 	private int extraBoosts = 0; // Extra boosts are collected
+	private int starScore = 0;
 
 	private void Awake() {
 		boostBar = GameObject.FindGameObjectWithTag("BoostBar").GetComponent<SimpleHealthBar>();
@@ -18,10 +19,15 @@ public class StatsCounter : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter2D(Collider2D col) {
-		if (!col.gameObject.CompareTag(Constants.BOOSTER)) return;
-		Destroy(col.gameObject);
-		extraBoosts++;
-		updateBoostBar();
+		if (col.gameObject.CompareTag (Constants.BOOSTER)) {
+			Destroy (col.gameObject);
+			extraBoosts++;
+			updateBoostBar ();
+		} else if (col.gameObject.CompareTag (Constants.STAR)) { 
+			Destroy (col.gameObject);
+			starScore++;
+			print ("The current score is: " + starScore);
+		}
 	}
 	
 	//////////// Helper Methods /////////////
