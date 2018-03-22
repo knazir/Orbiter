@@ -10,6 +10,7 @@ TagManager:
   - PowerUps
   - BoostBar
   - Star
+  - StarScore
   layers:
   - Default
   - TransparentFX

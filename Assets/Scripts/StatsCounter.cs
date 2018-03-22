@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StatsCounter : MonoBehaviour {
 
 	public SimpleHealthBar boostBar;
+	public Text starScoreText;
 	
 	private const int MAX_BOOSTS = 10;
 	
@@ -15,6 +17,7 @@ public class StatsCounter : MonoBehaviour {
 
 	private void Awake() {
 		boostBar = GameObject.FindGameObjectWithTag("BoostBar").GetComponent<SimpleHealthBar>();
+		starScoreText = GameObject.FindGameObjectWithTag("StarScore").GetComponent<Text>();
 		updateBoostBar();
 	}
 
@@ -26,7 +29,7 @@ public class StatsCounter : MonoBehaviour {
 		} else if (col.gameObject.CompareTag (Constants.STAR)) { 
 			Destroy (col.gameObject);
 			starScore++;
-			print ("The current score is: " + starScore);
+			updateStarScoreText ();
 		}
 	}
 	
@@ -50,5 +53,9 @@ public class StatsCounter : MonoBehaviour {
 
 	private void updateBoostBar(){
 		boostBar.UpdateBar(defaultBoost + extraBoosts, MAX_BOOSTS);
+	}
+
+	private void updateStarScoreText(){
+		starScoreText.text = "" + starScore;
 	}
 }
