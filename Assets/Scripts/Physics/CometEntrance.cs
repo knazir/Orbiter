@@ -11,6 +11,7 @@ public class CometEntrance : MonoBehaviour {
 
 	private Exploder2DObject exploder;
 	private PlatformerController platformerController;
+	private bool hopped = false;
 
 	private void Start() {
 		platformerController = FindObjectOfType<PlatformerController>();
@@ -19,7 +20,9 @@ public class CometEntrance : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter2D(Collider2D other) {
+		if (hopped) return;
 		// Get player off comet
+		hopped = true;
 		platformerController.HopOffComet();
 		platformerController.EnableMovement();
 	}

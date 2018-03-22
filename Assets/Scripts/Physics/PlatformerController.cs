@@ -9,6 +9,7 @@ public class PlatformerController : MonoBehaviour {
 
 	private const KeyCode JUMP = KeyCode.Space;
 	private const float MOVE_EPSILON = 0.001f;
+	private const float TARGET_EPSILON = 0.75f;
 	private const float FIRST_JUMP_MULT = 1.2f;
 
 	[SerializeField] private float defaultJumpForce = 500.0f;
@@ -24,6 +25,7 @@ public class PlatformerController : MonoBehaviour {
 	private Animator myAnimator;
 	private AudioSource myAudioSource;
 	private StatsCounter myStatsCounter;
+	private Transform target = null;
 
 	private bool facingRight = true;
 
@@ -53,8 +55,14 @@ public class PlatformerController : MonoBehaviour {
 		
 		// touch controls (remove animator bool set for non-mobile testing)
 		myAnimator.SetBool("Running", grounded && moving);
-		if (moving && movementEnabled) {
+		if ((moving && movementEnabled) || target != null) {
 			if (grounded) {
+				// move towards target
+				if (target != null && Vector2.Distance(transform.position, target.position) < TARGET_EPSILON) {
+					target = null;
+					moving = false;
+					return;
+				}
 				if (movingRight) moveRight();
 				else moveLeft();
 			} else {
@@ -268,6 +276,12 @@ public class PlatformerController : MonoBehaviour {
 		var jumpDirection = transform.up * cometJumpForce;
 		myRigidBody.AddForce(jumpDirection);
 		myRigidBody.angularVelocity = 0.0f;
+	}
+
+	public void WalkToPosition(Transform other) {
+		target = other;
+		moving = true;
+		movingRight = true;
 	}
 
 	//////////////////// Setter Methods ////////////////////////
