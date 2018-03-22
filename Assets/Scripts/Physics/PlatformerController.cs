@@ -10,7 +10,7 @@ public class PlatformerController : MonoBehaviour {
 	private const KeyCode JUMP = KeyCode.Space;
 	private const float MOVE_EPSILON = 0.001f;
 	private const float TARGET_EPSILON = 0.75f;
-	private const float FIRST_JUMP_MULT = 1.2f;
+	private const float FIRST_JUMP_MULT = 80.0f;
 
 	[SerializeField] private float defaultJumpForce = 500.0f;
 	[SerializeField] private float cometJumpForce = 3250.0f;
@@ -209,6 +209,7 @@ public class PlatformerController : MonoBehaviour {
 
 	private float getFirstJumpForce(GameObject groundPlanet) {
 		// returns a jump force relative to the planet mass and radius one is on
+		Debug.Log("Ground planet: " + groundPlanet);
 		var planetMass = getGroundPlanetMass(groundPlanet);
 		var planetRadius = getGroundPlanetRadius(groundPlanet);
 		var playerMass = GetComponent<Rigidbody2D>().mass;
@@ -216,7 +217,16 @@ public class PlatformerController : MonoBehaviour {
 		var escapeVelocity = (float)Math.Pow(2 * (planetMass / planetRadius), 0.5f);
 
 		// We need a small multiplier b/c this is a one time force while gravity is a force applied every frame
-		return  (escapeVelocity/Time.deltaTime) * playerMass * FIRST_JUMP_MULT;
+		
+//		Debug.Log("planetMass: " + planetMass);
+//		Debug.Log("planetRadius: " + planetRadius);
+//		Debug.Log("playerMass: " + playerMass);
+//		Debug.Log("Escape velocity: " + escapeVelocity);
+//		Debug.Log("Jump force: " + ((escapeVelocity / Time.deltaTime) * playerMass * FIRST_JUMP_MULT));
+//		Debug.Log("Time.deltaTime: " + Time.deltaTime);
+//		Debug.Log("Escape velocity ratio: " + escapeVelocity / Time.deltaTime);
+		
+		return  escapeVelocity * playerMass * FIRST_JUMP_MULT;
 	}
 
 	private float getGroundPlanetMass(GameObject groundPlanet){

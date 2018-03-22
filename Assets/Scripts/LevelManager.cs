@@ -17,6 +17,7 @@ public class LevelManager : MonoBehaviour {
     private float originalTimeScale;
 
     private void Start() {
+        FadeIn();
         originalTimeScale = Time.timeScale;
     }
     
@@ -54,6 +55,22 @@ public class LevelManager : MonoBehaviour {
     public void LoadNextLevel() {
         unpauseTime();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void FadeIn() {
+        fader.SetActive(true);
+        StartCoroutine(FadeFromBlack());
+    }
+
+    private IEnumerator FadeFromBlack() {
+        var canvasGroup = fader.GetComponent<CanvasGroup>();
+        while (canvasGroup.alpha > 0) {
+            canvasGroup.alpha -= Time.deltaTime / 2.0f;
+            yield return null;
+        }
+        canvasGroup.interactable = false;
+        fader.SetActive(false);
+        yield return null;
     }
 
     public void FadeOut() {
