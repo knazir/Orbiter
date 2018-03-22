@@ -36,9 +36,7 @@ public class LevelManager : MonoBehaviour {
     }
 
     public void FinishLevel() {
-        Debug.Log("Start");
         FadeOut();
-        Debug.Log("Here");
         Invoke("completeLevel", END_LEVEL_DELAY);
     }
     

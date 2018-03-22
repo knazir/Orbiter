@@ -41,6 +41,7 @@ public class StatsCounter : MonoBehaviour {
 	}
 
 	private void playSound(AudioClip sound) {
+		if (sound == null) return;
 		audioSource.PlayOneShot(sound);
 	}
 	
@@ -61,11 +62,13 @@ public class StatsCounter : MonoBehaviour {
 		return currentBoosts > 0;
 	}
 
-	private void updateBoostCount(){
+	private void updateBoostCount() {
+		if (boostCountText == null) return;
 		boostCountText.text = "" + currentBoosts;
 	}
 
-	private void updateStarScoreText(){
+	private void updateStarScoreText() {
+		if (starScoreText == null) return;
 		starScoreText.text = "" + starScore;
 	}
 
