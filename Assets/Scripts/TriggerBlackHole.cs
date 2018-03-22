@@ -73,6 +73,7 @@ public class TriggerBlackHole : MonoBehaviour {
 
 	private void startBlackHole() {
 		if (sunExploded) return;
+		FindObjectOfType<LevelManager>().PlayEvilBGM();
 		sun.tag = Constants.EXPLODER_2D;
 		Exploder2DUtils.SetActive(sun, true);
 		exploder.transform.position = Exploder2DUtils.GetCentroid(sun);

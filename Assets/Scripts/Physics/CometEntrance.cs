@@ -21,7 +21,6 @@ public class CometEntrance : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D other) {
 		if (other.CompareTag(Constants.PLAYER) || hopped) return;
-		Debug.Log(other);
 		// Get player off comet
 		hopped = true;
 		platformerController.HopOffComet();
@@ -48,11 +47,13 @@ public class CometEntrance : MonoBehaviour {
 		// Blow up comet
 		Exploder2DUtils.SetActive(exploder.gameObject, true);
 		exploder.transform.position = Exploder2DUtils.GetCentroid(gameObject);
+		GameObject.FindGameObjectWithTag(Constants.EXPLOSION_PLAYER).GetComponent<AudioSource>().Play();
 		exploder.Explode();
 		Invoke("destroy", DESTROY_DELAY);
 	}
 
 	private void destroy() {
 		Destroy(gameObject);
+		Destroy(GameObject.FindGameObjectWithTag(Constants.EXPLOSION_PLAYER).GetComponent<AudioSource>());
 	}
 }

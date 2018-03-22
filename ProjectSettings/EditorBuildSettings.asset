@@ -17,3 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tutorials/Tutorial_3.unity
     guid: e01b9694c546e0144874dd9f8e526d89
+  - enabled: 1
+    path: Assets/Scenes/Tutorials/Tutorial_4.unity
+    guid: d60487ed103b2024d9c96f8648f293f8
+  - enabled: 1
+    path: Assets/Scenes/BlackHoleLevel.unity
+    guid: 0e58fc2bb811d4bd0a9070bd9f6a4ef3

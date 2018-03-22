@@ -20,6 +20,7 @@ public static class Constants {
 	public const string COMET_PARTICLE_SYSTEM = "CometParticleSystem";
 	public const string EXPLODER_2D = "Exploder2D";
 	public const string EXPLODER_OBJECT = "ExploderObject";
+	public const string EXPLOSION_PLAYER = "ExplosionPlayer";
 	
 	// scenes
 	public const string SCENE_MENU = "Menu";

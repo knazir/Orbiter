@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour {
     [SerializeField] private GameObject screenDarkener;
     [SerializeField] private LevelCompleteManager levelCompleteManager;
     [SerializeField] private GameObject fader;
+    [SerializeField] private AudioClip evilBgm;
 
     private bool isPaused = false;
     private float originalTimeScale;
@@ -88,6 +89,13 @@ public class LevelManager : MonoBehaviour {
 
     public bool IsPaused() {
         return isPaused;
+    }
+
+    public void PlayEvilBGM() {
+        var audioSource = GetComponent<AudioSource>();
+        audioSource.Stop();
+        audioSource.clip = evilBgm;
+        audioSource.Play();
     }
 
     private void completeLevel() {

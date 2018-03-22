@@ -16,6 +16,7 @@ public class BlowUpPlayer : MonoBehaviour {
 	
 	private void OnTriggerEnter2D(Collider2D other) {
 		if (!other.CompareTag("Player")) return;
+		FindObjectOfType<CameraController>().StopFollowingPlayer();
 		other.gameObject.tag = Constants.EXPLODER_2D;
 		Exploder2DUtils.SetActive(exploder.gameObject, true);
 		exploder.transform.position = Exploder2DUtils.GetCentroid(other.gameObject);

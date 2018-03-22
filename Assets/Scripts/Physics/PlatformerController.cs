@@ -36,6 +36,7 @@ public class PlatformerController : MonoBehaviour {
 	private bool movingRight = true;
 	private bool movementEnabled = false;
 	private bool waitingToCheckFloatDeath = false;
+	private bool leavingLevel = false;
 	
 	//////////////////// Unity Event Handlers ////////////////////
 	
@@ -72,6 +73,7 @@ public class PlatformerController : MonoBehaviour {
 				if (target != null && Vector2.Distance(transform.position, target.position) < TARGET_EPSILON) {
 					target = null;
 					moving = false;
+					leavingLevel = true;
 					return;
 				}
 				if (movingRight) moveRight();
@@ -89,8 +91,13 @@ public class PlatformerController : MonoBehaviour {
 		}
 
 		myRigidBody.angularVelocity = 0.0f;
-		
-		if (getIncomingGround() != null) reorientToLandOn();
+
+		// TODO: Find out what the HELL happened here
+		if (leavingLevel) {
+			transform.rotation = Quaternion.FromToRotation(Vector2.up, transform.up);
+		} else if (getIncomingGround() != null) {
+			reorientToLandOn();
+		}
 	}
 
 	private void checkFloatingDeath() {

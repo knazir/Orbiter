@@ -26,6 +26,7 @@ TagManager:
   - Exploder2D
   - ExploderObject
   - Sun
+  - ExplosionPlayer
   layers:
   - Default
   - TransparentFX

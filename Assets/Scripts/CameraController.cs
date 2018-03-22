@@ -35,10 +35,9 @@ public class CameraController : MonoBehaviour {
 		// TODO: Figure out if we want some kind of offset (redundant for now)
 		offset = transform.position - player.position;
 	}
-	
 
-	private void Update() {		
-
+	public void StopFollowingPlayer() {
+		followPlayer = false;
 	}
 	
 	// Called after each Update every frame
